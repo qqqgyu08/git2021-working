@@ -93,6 +93,10 @@ Use VSCODE~~ editor -> default ... -> install
 	-u(--set-upstream) 로컬저장소에서 원격저장소로 업로드 허용
 	(-가 하나일경우 --의 단축키)
      -> git push -u origin master
+
+. 일반적인 작업의 흐름
+ : 소스작성 -> git status(확인) -> git add . -> git commit -m "메시지" ->
+   git push
 -------------------------------------------------------------------------
 3. 로컬저장소 생성(javascript) -> 코드 생성 -> 원격저장소  올림
 
