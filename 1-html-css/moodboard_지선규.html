@@ -1,0 +1,164 @@
+<html>
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+  <style>
+    /* https://coolors.co/606c38-283618-fefae0-dda15e-bc6c25 */
+    * {
+      box-sizing: border-box;
+    }
+
+    @font-face {
+      src: url(./font/Gompyo-Bold.ttf);
+      font-family: "gompyo";
+    }
+
+    body {
+      font-family: 'gompyo', serif;
+      width: 400px;
+      background-image: url("./img/background.jpg");
+      background-size: cover;
+      background-attachment: fixed;
+      background-position-x: center;
+      background-repeat: no-repeat;
+
+      display: grid;
+      gap: 0.5rem;
+      margin: 0 auto;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "header   header"
+        "banner   banner"
+        "nav      image"
+        "content  content"
+        "color    color"
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    header {
+      grid-area: header;
+    }
+
+    header>h1 {
+      background-color: #f1c300;
+      color: #2f6430;
+      padding: 0.5rem;
+      margin: 0;
+      text-align: center;
+    }
+
+    .banner {
+      grid-area: banner;
+
+      height: 100px;
+      background-image: url(./img/banner.jpg);
+
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      box-shadow: 0px 1px 5px #f1c300;
+    }
+
+    nav {
+      grid-area: nav;
+      background-color: #f1c300;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    nav>ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100px;
+      color: #2f6430;
+    }
+
+    .image {
+      grid-area: image;
+    }
+
+    article {
+      grid-area: content;
+      background-color: #f1c300;
+      padding: 0.5rem;
+    }
+
+    article>h2,
+    article>h3 {
+      color: #2f6430;
+    }
+
+    article>p {
+      color: #a2c73a;
+    }
+
+    .color-box {
+      grid-area: color;
+      display: flex;
+      height: 100px;
+    }
+
+    .color-box>div {
+      flex: 1 1 auto;
+    }
+
+    .color-box>div:nth-child(1) {
+      background-color: #2f6430;
+    }
+
+    .color-box>div:nth-child(2) {
+      background-color: #a2c73a;
+    }
+
+    .color-box>div:nth-child(3) {
+      background-color: #f1c300;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 텍스트 스타일(h1) -->
+  <header>
+    <h1>내가 좋아하는 요리 레시피</h1>
+  </header>
+  <!-- 대표 이미지(배너이미지)-->
+  <div class="banner">
+  </div>
+  <!-- 대표 문구(네비게이션) -->
+  <nav>
+    <ul>
+      <li>옥수수 치즈빵</li>
+      <li>소세지빵</li>
+      <li>달걀버거</li>
+    </ul>
+  </nav>
+  <!-- 대표 이미지(컨텐트이미지) -->
+  <div class="image">
+    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2019/08/05/55c148d9192197e255cd03a40fb1a7821.jpg"
+      width="100%">
+  </div>
+  <!-- 텍스트 스타일(h2, h3, p) -->
+  <article>
+    <h2 style="margin: 0; padding: 0;">이것은 H2 제목입니다.</h2>
+    <h3 style="margin: 0; padding: 0;">이것은 H3 제목입니다.</h3>
+    <p style="margin: 0; padding: 0;">이것은 내용입니다.</p>
+  </article>
+  <!-- 컬러 스타일 -->
+  <div class="color-box">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+</body>
+
+</html>

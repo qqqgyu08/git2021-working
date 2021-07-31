@@ -1,0 +1,137 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 700px;
+      /* 가운데정렬 */
+      margin: 0 auto;
+    }
+
+    nav {
+      /* 스크롤박스 외부일떈 원래 문서 배치 */
+      /* 스크롤박스 내부 top/left */
+      position: sticky;
+      top: 0px;
+      z-index: 10;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      /* 태그 안에 컨텐츠를 중앙 정렬 */
+      text-align: center;
+    }
+
+    nav li {
+      /* 옆으로 나열 */
+      display: inline-block;
+      margin-left: 5rem;
+    }
+
+    /* 첫번째 요소는 마진을 없앰 */
+    nav li:nth-child(1) {
+      margin-left: 0;
+    }
+
+    article {
+      float: left;
+      /* calculate: 계산하다 */
+      /* -/+ 꼭 띄어쓰기 앞뒤로 해야함, 붙이면 부호로 인식 */
+      width: calc(100% - 200px - 1rem);
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    aside {
+      width: 200px;
+      float: left;
+      position: sticky;
+      top: 5.5rem;
+    }
+
+    section {
+      /* a태그로 스크롤 이동했을 때 상단 마진을 줌 */
+      /* id가 걸려있는 요소에 걸어야함 */
+      scroll-margin-top: 8rem;
+    }
+
+    footer {
+      clear: both;
+    }
+
+    header,
+    nav,
+    article,
+    aside,
+    footer,
+    .banner {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Header</h1>
+  </header>
+  <nav>
+    <h1>Nav</h1>
+    <ul>
+      <li><a href="#menu-1">Menu1</a></li>
+      <li><a href="#menu-2">Menu2</a></li>
+      <li><a href="#menu-3">Menu3</a></li>
+    </ul>
+  </nav>
+  <div class="banner">
+    <h1>Banner</h1>
+  </div>
+  <article>
+    <section id="menu-1">
+      <h2>Menu1</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia deserunt ducimus doloribus accusamus quam
+        eaque. Minima, laborum maiores atque harum blanditiis accusamus voluptates omnis quidem velit fugit, magni
+        laboriosam in!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia deserunt ducimus doloribus accusamus quam
+        eaque. Minima, laborum maiores atque harum blanditiis accusamus voluptates omnis quidem velit fugit, magni
+        laboriosam in!</p>
+    </section>
+    <section id="menu-2">
+      <h2>Menu2</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam nemo officiis enim quisquam voluptas, incidunt
+        numquam quia ipsum laborum beatae voluptate perspiciatis? Modi voluptatem deleniti praesentium neque iure itaque
+        a.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam nemo officiis enim quisquam voluptas, incidunt
+        numquam quia ipsum laborum beatae voluptate perspiciatis? Modi voluptatem deleniti praesentium neque iure itaque
+        a.</p>
+    </section>
+    <section id="menu-3">
+      <h2>Menu3</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident delectus voluptatum ad explicabo! Tenetur
+        soluta ipsam ex earum dignissimos excepturi dolore, obcaecati laudantium nihil asperiores voluptatum ad
+        consequatur quaerat animi.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident delectus voluptatum ad explicabo! Tenetur
+        soluta ipsam ex earum dignissimos excepturi dolore, obcaecati laudantium nihil asperiores voluptatum ad
+        consequatur quaerat animi.</p>
+    </section>
+  </article>
+  <aside>
+    <h3>Aside</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae explicabo doloremque autem aspernatur quo
+      deleniti accusantium corrupti cupiditate sunt beatae. Sequi error excepturi at totam voluptates, possimus id
+      dolor molestias!</p>
+  </aside>
+  <footer>
+    <h3>Footer</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error pariatur recusandae porro excepturi dicta, nisi
+      voluptatibus. Dolor expedita, voluptas officia autem dicta, voluptates, eos alias doloremque quod ipsum odit
+      dolores?</p>
+  </footer>
+</body>
+
+</html>

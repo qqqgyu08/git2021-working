@@ -1,0 +1,57 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .container {
+      display: flex;
+      margin: 20px 0px;
+      border: 1px solid red;
+    }
+
+    .container.col {
+      flex-direction: column;
+    }
+
+    .item {
+      border: 1px solid black;
+      text-align: center;
+
+      /* flex item의 기본 주축 크기 */
+      flex-basis: 100px;
+    }
+
+    /* 균등배분 */
+    .item.grow {
+      flex-grow: 1;
+    }
+
+    .item.first {
+      flex-grow: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" style="width: 500px;">
+    <div class="item grow">1</div>
+    <div class="item grow">2</div>
+    <div class="item grow">3</div>
+    <div class="item grow">4</div>
+  </div>
+  <div class="container col" style="width: 500px; height: 500px;">
+    <div class="item grow">1</div>
+    <div class="item grow">2</div>
+    <div class="item grow">3</div>
+    <div class="item grow">4</div>
+  </div>
+
+  <!-- 여유공간을쪼개서 2:1:1 -->
+  <div class="container" style="width: 500px;">
+    <div class="item first">1</div>
+    <div class="item grow">2</div>
+    <div class="item grow">3</div>
+  </div>
+</body>
+
+</html>

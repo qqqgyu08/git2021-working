@@ -1,0 +1,90 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <style>
+    /* x-small: 모바일 세로 */
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* small: 모바일 가로화면, 태블릿(저렴한) 세로화면 */
+    @media (min-width: 576px) {
+      nav ul {
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      /* medium: 태블릿(저가) 가로화면, 태블릿(고가) 세로화면 이상 */
+      @media (min-width:768px) {
+        body {
+          width: 700px;
+          margin: 0 auto;
+        }
+      }
+
+      header {
+        margin-bottom: 1rem;
+      }
+
+      nav {
+        float: left;
+        width: 200px;
+      }
+
+      article {
+        float: left;
+        width: calc(100% - 200px - 1rem);
+        margin-left: 1rem;
+      }
+
+      nav ul {
+        flex-direction: column-reverse;
+        position: sticky;
+        top: 3rem;
+      }
+    }
+
+    header,
+    nav,
+    article {
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+
+<body>
+  <header>The header</header>
+  <nav>
+    <ul>
+      <li>Menu 1</li>
+      <li>Menu 2</li>
+      <li>Menu 3</li>
+    </ul>
+  </nav>
+  <article>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam, architecto aut eveniet illum aperiam eligendi?
+      Labore, consequuntur neque? Quibusdam, veritatis? Voluptatibus quasi, quas adipisci iusto atque unde repellat
+      cumque eaque?</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, voluptates, molestiae nam laudantium, numquam
+      nobis fuga eaque natus voluptas tempora iure labore commodi. Rerum, consectetur. Omnis repudiandae deserunt nobis
+      dicta.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore consequuntur excepturi voluptate nostrum
+      quasi quaerat! Optio maiores mollitia, aspernatur dolorem aliquid quidem laudantium tenetur eum rerum quisquam
+      magni sed voluptatum!</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tempore, quae molestias quis sint laborum
+      rem veniam, inventore nulla ex error architecto velit fugit sequi quidem libero. Eum, nisi? Numquam.</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis dolore corporis sit alias recusandae blanditiis
+      ipsa numquam, officiis ullam consectetur asperiores. Ullam incidunt dolorem maiores veniam voluptatem dicta soluta
+      reprehenderit.</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque earum, dicta molestiae, accusantium pariatur
+      impedit illo odit perferendis facere in excepturi deleniti eum labore, cum sequi libero minima ab non.</p>
+
+  </article>
+</body>
+
+</html>

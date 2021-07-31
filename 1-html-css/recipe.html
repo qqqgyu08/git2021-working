@@ -1,0 +1,538 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=East+Sea+Dokdo&family=Nanum+Gothic+Coding&family=Noto+Sans+KR&family=Song+Myung&display=swap"
+    rel="stylesheet">
+  <title>레시피</title>
+  <style>
+    @font-face {
+      src: url(./font/Gompyo-Bold.ttf);
+      font-family: "gompyo";
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'gompyo', serif;
+    }
+
+    /* 
+    색상1 #2f6430
+    색상2 #a2c73a
+    색상3 #f1c300 */
+
+    *::selection {
+      background-color: #a2c73a;
+      color: #a2c73a;
+    }
+
+    html {
+      font-size: 18px;
+    }
+
+    body {
+      width: 500px;
+      margin: 0 auto;
+      color: #f1c300;
+      background-image: url(./img/background.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-x: center;
+
+      display: grid;
+      gap: 1rem;
+      grid-template-areas:
+        "header"
+        "banner"
+        "nav"
+        "content"
+        "sidebar"
+        "footer";
+    }
+
+    nav {
+      border: 5px solid #a2c73a;
+      background-color: #2f6430;
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      grid-area: nav;
+    }
+
+    nav ul {
+      color: #f1c300;
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: row;
+      /* position: sticky; */
+    }
+
+    @media (min-width: 768px) {
+      body {
+        width: 700px;
+        margin: 0 auto;
+        /* display: flex; */
+        grid-template-columns: 2fr 5fr;
+        grid-template-areas:
+          "header header"
+          "banner banner"
+          "nav      nav"
+          "sidebar content"
+          "footer footer";
+        /* top: 0; */
+      }
+
+      nav {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      aside {
+        position: sticky;
+        top: 6rem;
+        height: fit-content;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      body {
+        width: 1200px;
+        margin: 0 auto;
+        grid-template-columns: 3fr 7fr 2fr;
+        grid-template-areas:
+          "header header header"
+          "banner banner banner"
+          "nav  content sidebar"
+          "footer footer footer"
+        ;
+      }
+
+      nav {
+        position: sticky;
+        height: fit-content;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+    }
+
+    a {
+      color: #f1c300;
+      text-decoration: none;
+    }
+
+    h2 a {
+      color: #f1c300;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      background-color: burlywood;
+    }
+
+    nav a:active {
+      background-color: #a2c73a;
+    }
+
+    header {
+      grid-area: header;
+    }
+
+    header>h1 {
+      text-shadow: 1px 1px 10px #f1c300;
+      background-color: #2f6430;
+      color: #ffffff;
+      padding: 0.5rem;
+      margin: 0;
+      padding: 1rem 1.5rem;
+      /* margin-bottom: 1rem; */
+    }
+
+    .banner {
+      grid-area: banner;
+    }
+
+    h2,
+    h3 {
+      background-color: #2f6430;
+      margin-top: 0rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0.5rem;
+    }
+
+    nav,
+    article,
+    aside,
+    h1 {
+      box-shadow: 1px 1px 20px #2f6430;
+    }
+
+    h2::after {
+      content: "🔍";
+      margin-left: 0rem;
+    }
+
+    .recipe-image {
+      overflow: hidden;
+    }
+
+    .recipe-image:hover img {
+      transform: scale(1.2);
+    }
+
+    p {
+      font-size: 110%;
+      color: #2f6430;
+      line-height: 2rem;
+    }
+
+    article {
+      border: 5px solid #a2c73a;
+      /* margin-top: 1rem; */
+      grid-area: content;
+    }
+
+    section {
+      background-color: #ffffff;
+      padding: 0.5rem;
+    }
+
+    section table {
+      background-color: #a2c73a;
+      border-collapse: collapse;
+    }
+
+    tbody>tr:nth-child(2n-1) {
+      background-color: #ffffff;
+      color: #2f6430;
+    }
+
+    tbody>tr:nth-child(2n) {
+      background-color: #a2c73a;
+      color: #ffffff;
+    }
+
+    th {
+      color: #2f6430;
+    }
+
+    strong {
+      padding-left: 1rem;
+    }
+
+    ul>li::before {
+      content: "🍞";
+      margin: 0rem 0.5rem;
+      color: #f1c300;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ol {
+      background-color: #a2c73a;
+      padding-left: 1.5rem;
+      margin: 0;
+    }
+
+    ol li {
+      color: #ffffff;
+      padding: 0.5rem;
+    }
+
+    aside {
+      width: 200px;
+      border: 5px solid #a2c73a;
+      background-color: #ffffff;
+      position: sticky;
+      /* margin-top: 2rem; */
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-evenly;
+      text-align: center;
+      grid-area: sidebar;
+    }
+
+    footer {
+      text-align: right;
+      clear: both;
+      grid-area: footer;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <h1>내가 좋아하는 요리 레시피</h1>
+  </header>
+  <div class="banner">
+    <a href="https://www.10000recipe.com/shop/event.html?seq=14" target="_blank"><img width="100%" alt="배너"
+        src="./img/banner.jpg"></a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#recipe-1">옥수수 치즈빵</a></li>
+      <li><a href="#recipe-2">소세지빵</a></li>
+      <li><a href="#recipe-3">달걀버거</a></li>
+    </ul>
+  </nav>
+
+
+  <article>
+    <section>
+      <div>
+        <h2 id="recipe-1"><a href="https://www.10000recipe.com/recipe/6917038" target="_blank">옥수수 치즈빵</a>
+        </h2>
+      </div>
+      <div class="recipe-image">
+        <img width="100%" alt="옥수수 치즈빵"
+          src="https://recipe1.ezmember.co.kr/cache/recipe/2019/08/05/55c148d9192197e255cd03a40fb1a7821_m.jpg">
+      </div>
+      <p>에어프라이어만 있다면 난 든든해~!
+        간식부터 저녁밥상까지~!
+        세상의 모든 레시피 만개의레시피</p>
+    </section>
+    <section>
+      <h3>재료 Ingredients</h3>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>옥수수콘</strong></td>
+            <td><em>300g</em></td>
+          </tr>
+          <tr>
+            <td><strong>모짜렐라치즈</strong></td>
+            <td><em>1종이컵</em></td>
+          </tr>
+          <tr>
+            <td><strong>마요네즈</strong></td>
+            <td><em>3숟가락</em></td>
+          </tr>
+          <tr>
+            <td><strong>모닝빵</strong></td>
+            <td><em>8개</em></td>
+          </tr>
+          <tr>
+            <td><strong>허니머스타드</strong>
+            <td><em>3숟가락</em></td>
+          </tr>
+          <tr>
+            <td><strong>후추</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h3> 조리 순서</h3>
+      <ol>
+        <li>옥수수콘는 체에 밭쳐 물기를 뺀다.</li>
+        <li>볼에 옥수수콘, 허니머스타드, 마요네즈, 모짜렐라치즈, 후추를 넣고 섞는다.</li>
+        <li>모닝빵은 가운데를 파낸다.</li>
+        <li>모닝빵에 2를 넣는다.</li>
+        <li>에어프라이어 바스켓에 넣고 180도 온도에서 10분간 구워 완성한다.</li>
+      </ol>
+    </section>
+    <section>
+      <h2 id="recipe-2"><a href="https://www.10000recipe.com/recipe/6954909" target="_blank">소세지빵</a></h2>
+      <div class="recipe-image">
+        <img width="100%" alt="소세지빵"
+          src="https://recipe1.ezmember.co.kr/cache/recipe/2021/03/10/16e8fbcb4ac56828ce1818f8df6ce9d81_m.jpg">
+      </div>
+      <p>호떡믹스와 에어프라이어로 집에서도 소세지빵을
+        쉽고 맛있게 만들수 있답니다. 이제 사 먹지 말고 만들어 드세요 .너무 맛있답니다 ^^</p>
+    </section>
+    <section>
+      <h3>재료 Ingredients</h3>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>호떡믹스</strong></td>
+            <td>270g</td>
+          </tr>
+          <tr>
+            <td><strong>후랑크소시지</strong></td>
+            <td><em>6개</em></td>
+          </tr>
+          <tr>
+            <td><strong>파프리카</strong></td>
+            <td><em>1개</em></td>
+          </tr>
+          <tr>
+            <td><strong>캔옥수수</strong></td>
+            <td><em>1통</em></td>
+          </tr>
+          <tr>
+            <td><strong>모짜렐라치즈</strong>
+            <td><em>약간</em></td>
+          </tr>
+          <tr>
+            <td><strong>마요네즈</strong></td>
+            <td><em>1숟가락</em></td>
+          </tr>
+          <tr>
+            <td><strong>케찹</strong></td>
+            <td><em>1숟가락</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h3> 조리 순서</h3>
+      <ol>
+        <li>재료를 준비해요.
+          토핑으로 잘게 썬 파프리카와
+          캔 옥수수를 준비했어요.
+          피망이나 양파를 넣으셔도 좋아요</li>
+        <li>호떡믹스 한 봉에 이스트를 약간 넣고 가볍게 섞어요</li>
+        <li>믹스 한 봉에 270g에 미지근한 물을 180ml 넣으라고 쓰여 있지만, 믹스제품마다 차이가 있고, 호떡보다는 약간 됨직하게 반죽을 해주어야 해요.
+          물을 조금씩 넣으면서 반죽의 정도를 조절하세요.</li>
+        <li>주걱으로 젓다가 손으로 치대면서 고루 반죽을 해주세요</li>
+        <li>반죽이 완성되면</li>
+        <li>6등분으로 나누어 줍니다.
+          6개의 빵이 나오는 거에요</li>
+        <li>반죽을 소세지 길이로 맞추어 납작하게 펴 주세요</li>
+        <li>소세지를 가운데 넣고 말아 줍니다.</li>
+        <li>가위로 아래 부분만 약간 남겨두고 1센치 간격으로 잘라 주세요</li>
+        <li>자른 부분을 왼쪽, 오른쪽을 번갈아 가면서 펼쳐 주세요</li>
+        <li>모양을 잘 만들어 줍니다,</li>
+        <li>캔 옥수수와 파프리카에 마요네즈를 약간 넣고 버무려 주세요</li>
+        <li>빵 위에 고루 올려 주세요</li>
+        <li>모짜렐라 치즈를 위에 뿌려 주세요</li>
+        <li>마요네즈와 케찹을 가늘게
+          뿌려 줍니다. 아이들 약병이나 지퍼백을 작게 구멍내어 짤 주머니를 만드셔도 좋아요.</li>
+        <li>파슬리 가루 있으시면 뿌려 주세요 (생략 가능 입니다 )</li>
+        <li>에어프라이어에 종이호일을 깔고 위에 구워야 빵이 달라 붙지 않아요 .
+          180도 5분을 먼저 굽고, 온도를 130도로 줄여서 15분을 구워주세요.
+          센불에만 오래 구우면 겉은 타고 반죽은 익지 않아요</li>
+        <li>완성된 호떡믹스 소세지빵이에요.
+          에어프라이어와 호떡믹스, 재료만 준비하면 누구든 쉽게 홈베이킹으로 맛있는 소세지빵을 만들 수 있어요.</li>
+        <li>사 먹는 소세지빵 맛 못지 않게 너무 맛있어요.
+          아이도 어른에게도 인기만점이랍니다 ^^
+          아이들과도 맛있게 만들어 보세요
+          베이킹 못하는 저도 성공한 호떡믹스 소세지빵이랍니다 ^^</li>
+      </ol>
+    </section>
+    <section>
+      <h2 id="recipe-3"><a href="https://www.10000recipe.com/recipe/6953539" target="_blank">달걀버거</a></h2>
+      <div class="recipe-image">
+        <img src="https://recipe1.ezmember.co.kr/cache/recipe/2021/02/16/61153bf7816901787cdb5558a3d8e1801_m.jpg"
+          width="100%" alt="달걀버거">
+      </div>
+      <p>탱글탱글한 달걀로 뚜껑을 덮은 달걀버거!
+        급찐살로 식단을 조절해야 된다면?!
+        탄수화물을 줄인 에그버거로 시작하세요 :)
+        귀여워서 다이어트도시락으로 싸도 bb
+
+        세상의모든레시피 만개의레시피</p>
+    </section>
+    <section>
+      <h3>재료 Ingredients</h3>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>달걀</strong></td>
+            <td>6개</td>
+          </tr>
+          <tr>
+            <td><strong>슬라이스치즈</strong></td>
+            <td><em>1장</em></td>
+          </tr>
+          <tr>
+            <td><strong>방울토마토</strong></td>
+            <td><em>3개</em></td>
+          </tr>
+          <tr>
+            <td><strong>식초</strong></td>
+            <td><em>1숟가락</em></td>
+          </tr>
+          <tr>
+            <td><strong>슬라이스햄</strong>
+            <td><em>6장</em></td>
+          </tr>
+          <tr>
+            <td><strong>샐러드채소</strong></td>
+            <td><em>1/2줌</em></td>
+          </tr>
+          <tr>
+            <td><strong>소금</strong></td>
+            <td><em>1/2숟가락</em></td>
+          </tr>
+          <tr>
+            <td><strong>스리라차소스</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h3> 조리 순서</h3>
+      <ol>
+        <li>달걀은 물에 소금, 식초를 넣고 15분간 삶는다.</li>
+        <li>삶은 달걀은 찬물에 담가 껍질을 벗긴다.</li>
+        <li>방울토마토는 슬라이스하고 슬라이스치즈는 한 입 크기로 썬다.</li>
+        <li>삶은 달걀을 2등분 한다.</li>
+        <li>달걀>샐러드채소>토마토>슬라이스치즈>슬라이스햄> 스리라차소스>달걀 순으로 올린 뒤 꼬지를 꽂아 완성한다.</li>
+      </ol>
+    </section>
+  </article>
+  <aside>
+    <div>
+      <a href="https://www.10000recipe.com/issue/view.html?cid=gdubu33&types=magazine" target="_blank">
+        <img width="50px" src="https://recipe1.ezmember.co.kr/img/mobile/cate_issue2_07.png" alt="만개의레시피">
+        <p>만개의 레시피</p>
+      </a>
+    </div>
+    <div>
+      <a href="https://www.10000recipe.com/issue/view.html?cid=10000know&types=magazine" target=" _blank">
+        <img width="50px" src="https://recipe1.ezmember.co.kr/img/cate_issue2_knowhow.png" alt="만개의노하우">
+        <p>만개의 노하우</p>
+      </a>
+    </div>
+    <div>
+      <a href="https://www.10000recipe.com/issue/view.html?cid=10000mag&types=magazine" target=" _blank">
+        <img width="50px" src="https://recipe1.ezmember.co.kr/img/cate_issue2_magazine.png" alt="만개의매거진">
+        <p>만개의 매거진</p>
+      </a>
+    </div>
+  </aside>
+  <footer>
+    <p>javaweb_지선규</p>
+  </footer>
+</body>
+
+</html>

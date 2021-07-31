@@ -1,0 +1,47 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <!-- table: 가로/세로가 있는 표 형식의 표현가능한 태그 -->
+  <!-- border: 외각선 cellspacing: html에선 사라질 옵션 css로 -->
+  <table border="1" cellspacing="0" width="500">
+    <!-- thead: 테이블의 헤더 부분을 나타내는 시맨틱 태그 -->
+    <thead>
+      <tr>
+        <!-- th(table head): 컬럼명 (열 이름) -->
+        <th>이름</th>
+        <th>연락처</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <!-- rowspan(row span) -->
+        <!-- row: 행, 가로축 -->
+        <td rowspan="2">홍길동</td>
+        <td>010-1234-5678</td>
+      </tr>
+      <tr>
+        <td>010-7777-7777</td>
+      </tr>
+      <tr>
+        <td>지선규</td>
+        <td>010-6334-7349</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <!-- colspan(column span) -->
+        <!-- column: 열, 세로축 -->
+        <!-- span: 늘어남 -->
+        <td colspan="2">총 2건</td>
+      </tr>
+    </tfoot>
+  </table>
+
+
+</body>
+
+</html>
