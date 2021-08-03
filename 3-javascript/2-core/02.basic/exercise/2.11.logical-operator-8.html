@@ -1,0 +1,20 @@
+<html>
+
+<body>
+  <script>
+    if (-1 || 0) alert('first');
+    // (-1 || 0) -> -1 -> true -> 출력
+
+
+    if (-1 && 0) alert('second');
+    // (-1 && 0) -> -1 -> false -> 출력
+
+
+    if (null || -1 && 1) alert('third');
+    // &&먼저 -> (null || 1) -> (1) -> 출력
+
+
+  </script>
+</body>
+
+</html>
