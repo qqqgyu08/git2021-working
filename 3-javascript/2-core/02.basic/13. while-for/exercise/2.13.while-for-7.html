@@ -1,0 +1,45 @@
+<html>
+
+<body>
+  <script>
+    let n = 10;
+
+    // i, j, k, l, m, n --->
+    for (let i = 2; i <= n; i++) {
+      // 소수인지 아닌지를 기록할 변수(flag)
+      let isPrime = true;
+
+      for (let j = 2; j < i; j++) {
+        if (i % j == 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      isPrime && console.log(i);
+    }
+
+    // let n = prompt("숫자입력", '');
+
+    // for (let i = 2; i <= n; i++) {
+    //   for (let j = 2; i > j; j++) {
+    //     if (i % j == 0) continue;
+    //   }
+    //   alert(i);
+    // }
+//------------------------------------------------------
+    // let num = prompt("숫자", 0);
+    // let result = '2';
+
+    // for (let i = 3; i <= num; i = i + 2) {
+    //   let ifPrime = true;
+    //   for (let j = 3; j < i; j = j + 2) {
+    //   }
+    // }
+    // if (ifPrime) { result = `${result}-${i}` }
+
+    // return result;
+
+  </script>
+</body>
+
+</html>
