@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <script>
+    let x = prompt("숫자", '');
+    let n = prompt("몇 제곱", '');
+
+    if (n < 1) {
+      alert(`${n}은 1이상의 자연수이어야 합니다.`);
+    } else {
+      alert(pow(x, n));
+    }
+
+    // x^n
+    function pow(x, n) {
+      let result = x;
+
+      for (let i = 1; i < n; i++) {
+        result *= x;
+      }
+
+      return result;
+    }
+  </script>
+</body>
+
+</html>

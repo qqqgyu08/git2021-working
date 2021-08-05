@@ -1,0 +1,41 @@
+<html>
+
+<body>
+  <script>
+    // for (let i = 10; i > 1; i--) {
+    //   console.log(' '.repeat(9 - i / 2) + '*'.repeat((i - 10) / 1));
+    // }
+
+    let n = 5;
+    let string = "";
+
+    // 윗뚜껑
+    for (let i = 1; i <= n; i++) {
+
+      for (let j = n; j > i; j--) {
+        string += " ";
+      }
+      for (let k = 0; k < i * 2 - 1; k++) {
+        string += "*";
+      }
+      string += "\n";
+    }
+
+    // 아래부분
+    for (let i = 1; i <= n - 1; i++) {
+
+      for (let j = 0; j < i; j++) {
+        string += " ";
+      }
+      for (let k = (n - i) * 2 - 1; k > 0; k--) {
+        string += "*";
+      }
+      string += "\n";
+    }
+
+    // 콘솔
+    console.log(string);
+  </script>
+</body>
+
+</html>
