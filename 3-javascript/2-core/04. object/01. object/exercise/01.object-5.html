@@ -12,19 +12,18 @@
 
     function multiplyNumeric() {
       for (let prop in menu) {
-        if (typeof menu[prop] == 'number') {
+        if (typeof menu[prop] == "number") {
+          // menu[prop] = menu[prop] * 2;
           menu[prop] *= 2;
         }
       }
+      return menu;
     }
 
     multiplyNumeric(menu);
+
     console.log(menu);
-
-
-
     // console.log(multiplyNumeric(menu.prop));
-
 
     // 함수 호출 후
     // menu = {

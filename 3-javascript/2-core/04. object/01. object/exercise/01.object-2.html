@@ -4,10 +4,13 @@
   <script>
     let schedule = {};
 
+    // 상수객체 - 수정가능
+    // const schedule = {} 
+
     function isEmpty(time) {
       for (let prop in time) {
         return false;
-      }
+      } // 왠만하면 else, else if 쓰지말것
       return true;
     }
 
