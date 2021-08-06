@@ -1,0 +1,22 @@
+<html>
+
+<body>
+  <script>
+    let schedule = {};
+
+    function isEmpty(obj) {
+      for (let prop in obj) {
+        return false;
+      }
+      return true;
+    }
+
+    alert(isEmpty(schedule)); // true
+
+    schedule["8:30"] = "get up"; // 값을 넣고 나서ㅓㅓㅓㅓㅓㅓ
+
+    alert(isEmpty(schedule)); // false
+  </script>
+</body>
+
+</html>

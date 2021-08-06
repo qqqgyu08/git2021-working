@@ -1,0 +1,41 @@
+<html>
+
+<body>
+  <script>
+    // 함수 호출 전
+    let menu = {
+      width: 200,
+      height: 300,
+      title: "My menu"
+    };
+
+
+    function multiplyNumeric() {
+      for (let prop in menu) {
+        if (typeof menu[prop] == 'number') {
+          menu[prop] *= 2;
+        }
+      }
+    }
+
+    multiplyNumeric(menu);
+    console.log(menu);
+
+
+
+    // console.log(multiplyNumeric(menu.prop));
+
+
+    // 함수 호출 후
+    // menu = {
+    //   width: 400,
+    //   height: 600,
+    //   title: "My menu"
+    // };
+
+
+
+  </script>
+</body>
+
+</html>
