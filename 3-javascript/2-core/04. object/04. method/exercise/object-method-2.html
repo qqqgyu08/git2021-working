@@ -1,0 +1,31 @@
+<html>
+
+<body>
+  <script>
+    let calculator = {
+      a: 0,
+      b: 0,
+
+      read() {
+        // a 변수명 앞에 let, var, const가 없음
+        // 또는 this 지시자가 없음
+        // ㄴ> 전역객체(window)의 전역 변수로 생성함
+
+        this.a = +prompt("첫번째수");
+        this.b = +prompt("두번째수");
+      },
+      sum() {
+        return this.a + this.b;
+      },
+      mul() {
+        return this.a * this.b;
+      },
+    };
+
+    calculator.read();
+    alert(calculator.sum());
+    alert(calculator.mul());
+  </script>
+</body>
+
+</html>

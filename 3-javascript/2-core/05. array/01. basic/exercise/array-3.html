@@ -1,0 +1,16 @@
+<html>
+
+<body>
+  <script>
+    let arr = ["a", "b"];
+
+    arr.push(function () {
+      alert(this);
+    })
+
+    // this가 모든 아이템을 불러옴
+    arr[2](); // a,b,function () {alert(this);}
+  </script>
+</body>
+
+</html>

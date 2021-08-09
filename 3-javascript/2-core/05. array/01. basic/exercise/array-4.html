@@ -1,0 +1,31 @@
+<html>
+
+<body>
+  <script>
+    function sumInput() {
+      let arr = [];
+
+
+
+      while (true) {
+        let num = prompt("숫자 입력", '0');
+        if (num === null || num === "" || isNaN(+num)) { // 문자일경우 뭐지?
+          break;
+        }
+        arr.push(+num); // 이부분 어ㄹ
+      }
+
+      let sum = 0;
+
+      for (let i of arr) {
+        sum += i;
+      }
+      return sum;
+    }
+
+    alert(sumInput());
+
+  </script>
+</body>
+
+</html>

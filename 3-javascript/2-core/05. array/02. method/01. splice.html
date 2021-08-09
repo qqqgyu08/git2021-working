@@ -1,0 +1,29 @@
+<html>
+
+<body>
+  <script>
+    let arr = ["I", "go", "home"];
+
+    delete arr[1]; // "go"를 삭제합니다.
+
+    alert(arr[1]); // undefined
+
+    // arr.splice(n): n위치부터 마지막요소까지 삭제
+    // arr.splice(1, 2): 첫번째 요소부터 2개 삭제
+    // splice는 삭제 할때 쓰이지만 특정위치에 넣을 수도 있다 
+
+    // delete를 써서 요소를 지우고 난 후 배열 --> arr = ["I",  , "home"];
+
+    // 배열.splice(위치, 0, 추가할 목록)
+    // 1. 특정위치에 목록 추가
+    arr.splice(1, 0, "Let's", "dance");
+
+    // 배열 spread 연산을 함수의 매개변수로 사용하면
+    // 각각의 요소에 매개변수를 등록해줌
+    arr.splice(1, 0, ...["study", "javascript"]);
+
+    alert(arr.length); // 3
+  </script>
+</body>
+
+</html>
