@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <script>
+    // let result = arr.find(function (item, index, array) {
+    //   // true가 반환되면 반복이 멈추고 해당 요소를 반환합니다.
+    //   // 조건에 해당하는 요소가 없으면 undefined를 반환합니다.
+    // });
+
+    // 첫번째 요소 값만 반환한다
+
+    let users = [
+      { id: 1, name: "John" },
+      { id: 2, name: "Pete" },
+      { id: 3, name: "Mary" }
+    ];
+
+    // 화살표함수(=판별함수)의 반환값이 true인 요소를 반환
+    let user = users.find(item => item.id == 1);
+
+    alert(user);
+    alert(user.name); // John
+    alert(user.id); // 1
+  </script>
+</body>
+
+</html>

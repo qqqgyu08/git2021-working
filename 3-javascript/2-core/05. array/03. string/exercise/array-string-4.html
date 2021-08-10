@@ -1,0 +1,21 @@
+<html>
+
+<body>
+  <script>
+    function intStr(str) {
+      let intstr = "";
+      for (let prop of str) {
+        // isNaN(): 숫자가 아닐경우 true 리턴, 숫자일 경우 false 리턴한다. 
+        if (!isNaN(prop)) intstr += prop;
+      }
+      // parseInt(): 문자열을 숫자로 변환하기 
+      return parseInt(intstr);
+      // return intstr; -> 걍 문자열
+    }
+
+    console.log(intStr("$120"));
+
+  </script>
+</body>
+
+</html>

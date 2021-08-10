@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <script>
+    //부분 문자열 찾기? includes
+    function checkSpam(str) {
+      let lowerStr = str.toLowerCase();
+      // let arr = lowerStr.split(' ');
+
+
+      // return arr.includes('viagra')
+      //   || arr.includes('xxx');
+      return lowerStr.includes('viagra')
+        || lowerStr.includes('xxx');
+    }
+
+    console.log(checkSpam('buy ViAgRA now'));
+    console.log(checkSpam('free xxxxx'));
+    console.log(checkSpam("innocent rabbit"));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<html>
+
+<body>
+  <script>
+    let countries = ['Österreich', 'Andorra', 'Vietnam'];
+
+    // Andorra, Vietnam, Österreich (제대로 정렬이 되지 않았습니다.)
+    alert(countries.sort((a, b) => a > b ? 1 : -1));
+
+    // Andorra,Österreich,Vietnam (제대로 정렬되었네요!)
+    alert(countries.sort((a, b) => a.localeCompare(b)));
+
+  </script>
+</body>
+
+</html>
