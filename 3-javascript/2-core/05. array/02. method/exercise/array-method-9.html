@@ -2,7 +2,35 @@
 
 <body>
   <script>
+    function sortByAge(arr) {
+      arr.sort((a, b) => a.age - b.age);
+    }
 
+    // function sortByKey(arr, key) {
+    //   if(typeof arr[0][key] == "number") {
+    //     arr.sort((a, b) => a[key] - b[key])
+    //   } else if (typeof arr[0][key] == "string") {
+    //     arr.sort((a,b) => {
+    //       return a[key].localeCompare(b[key]);
+    //     })
+    //   } else {
+    //     arr.sort((a,b) => Number)adsadsad
+    //   }
+
+    // }
+
+    let john = { name: "John", age: 25 };
+    let pete = { name: "Pete", age: 30 };
+    let mary = { name: "Mary", age: 28 };
+
+    let arr = [pete, john, mary];
+
+    sortByAge(arr);
+
+    // now sorted is: [john, mary, pete]
+    alert(arr[0].name); // John
+    alert(arr[1].name); // Mary
+    alert(arr[2].name); // Pete
   </script>
 </body>
 

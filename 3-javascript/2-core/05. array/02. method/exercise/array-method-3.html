@@ -1,18 +1,25 @@
 <html>
-  <body>
-    <script>
-      filterRangeInPlace(arr, a, b) {
 
+<body>
+  <script>
+    function filterRangeInPlace(arr, a, b) {
 
+      let result = arr.filter(item => item < a || item > b);
+      // console.log(result);
 
-
+      for (let item of result) {
+        if (arr.includes(item)) {
+          arr.splice(arr.indexOf(item), 1);
+        }
       }
+    }
 
-      let arr = [5, 3, 8, 1];
+    let arr = [5, 3, 8, 1];
 
-      filterRangeInPlace(arr, 1, 4);
+    filterRangeInPlace(arr, 1, 4);
 
-      console.log(arr);
-    </script>
-  </body>
+    console.log(arr);
+  </script>
+</body>
+
 </html>

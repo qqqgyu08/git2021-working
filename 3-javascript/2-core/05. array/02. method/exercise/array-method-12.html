@@ -2,7 +2,25 @@
 
 <body>
   <script>
+    function unique(arr) {
+      return [...new Set(arr)];
+    }
 
+    let strings = ["Hare", "Krishna", "Hare", "Krishna",
+      "Krishna", "Krishna", "Hare", "Hare", ":-O"
+    ];
+
+    // 중복없이 저장 가능
+    let set = new Set();
+    set.add("lee");
+    set.add("hong");
+    set.add("lee");
+    set.add("kem");
+
+    for (let value of set) {
+      console.log(value);
+    }
+    console.log(set.size);
   </script>
 </body>
 

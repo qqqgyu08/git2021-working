@@ -1,12 +1,17 @@
 <html>
-  <body>
-    <script>
-      // 내림차순으로 정렬하기
-      let arr = [5, 2, 1, -10, 8];
 
-      // 요소를 내림차순으로 정렬해주는 코드를 여기에 작성해보세요.
+<body>
+  <script>
+    // 내림차순으로 정렬하기
+    let arr = [5, 2, 1, -10, 8];
 
-      alert(arr); // 8, 5, 2, 1, -10
-    </script>
-  </body>
+    // a-b:
+    // a가 더 크면 양수 -> a를 뒤에 놓음
+
+    arr.sort((a, b) => -(a - b));
+
+    console.log(arr); // 8, 5, 2, 1, -10
+  </script>
+</body>
+
 </html>
