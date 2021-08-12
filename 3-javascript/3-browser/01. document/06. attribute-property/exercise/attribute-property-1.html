@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <!-- 문서에서 data-widget-name이라는 속성을 가진 요소를 찾고,
+   해당 요소의 값==========menu를 읽는 코드를 작성해 보세요. -->
+
+  <div data-widget-name="menu">Choose the genre</div>
+
+  <script>
+    const div = document.querySelector('div');
+
+    // camel-case로바뀜
+    // data-widget-name -> dataset.widgetName;
+    console.log(div.dataset.widgetName);
+
+    // console.log(div).getAttribute('data-widget-name'));
+  </script>
+</body>
+
+</html>

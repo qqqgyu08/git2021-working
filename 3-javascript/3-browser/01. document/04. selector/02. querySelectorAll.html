@@ -1,0 +1,62 @@
+<html>
+
+<body>
+  <div>영역</div>
+  <ul id="list">
+    <li>1-1</li>
+    <li>1-2</li>
+  </ul>
+  <ul>
+    <li class="item">2-1</li>
+    <li class="item">2-2</li>
+  </ul>
+  <ol>
+    <li>3-1</li>
+    <li>3-2</li>
+  </ol>
+  <input type="text">
+  <input type="checkbox">
+  <script>
+    // 상위요소.querySelector("CSS선택자")
+    const div = document.querySelector("div");
+    // console.log(div);
+
+    const divList = document.querySelectorAll("div");
+    console.log(divList);
+
+    // ---------------------------------같은 요소들을 선택함
+    // id가 list인 요소의 li태그 자식들
+    const liList1 = document.querySelectorAll("#list>li");
+    console.log(liList1);
+
+    // id선택자
+    const ul = document.querySelector("#list");
+    console.log(ul);
+
+    // 요소(document 외에도 올 수 있음).querySelector
+    const liList2 = ul.querySelectorAll("li");
+    console.log(liList2);
+    //-----------------------------------------------------
+
+    // class선택자
+    const liList = document.querySelectorAll(".item");
+    console.log(liList);
+
+    // 후손/자손 선택자
+    const oiList = document.querySelectorAll("ol>li");
+    console.log(oiList);
+
+    // pseudo class(의사클래스)
+    const liFirst = document.querySelector("ol>li:first-child");
+    console.log(liFirst);
+
+    // 속성선택자(attribute selector)
+    // 태그[속성명=속성값] -> 해당 태그에 해당 속성이 있는 요소를 선택
+    const text = document.querySelector('input[type="text"]');
+    const chk = document.querySelector('input[type="checkbox"]');
+    console.log(text);
+    console.log(chk);
+  </script>
+</body>
+
+</html>

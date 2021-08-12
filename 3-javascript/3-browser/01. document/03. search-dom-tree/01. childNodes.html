@@ -1,0 +1,25 @@
+<html>
+
+<body>
+  <div>시작</div>
+
+  <ul>
+    <li>
+      <b>항목</b>
+    </li>
+  </ul>
+
+  <!-- script 태그를 가장 하단 -->
+  <script>
+    // body 밑에 있는 하위 노드들을 탐색
+    for (let node of document.body.childNodes) {
+      console.log(node);
+    }
+
+    console.log(document.body.firstChild);
+    console.log(document.body.lastChild);
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<html>
+
+<body>
+  <div>사용자:</div>
+  <ul>
+    <li>John</li>
+    <li>Pete</li>
+  </ul>
+
+  <!-- 임의의 DOM 요소 노드 elem이 있다고 가정해봅시다.
+
+    elem.lastChild.nextSibling은 항상 null일까요?
+      ㄴ elem.lastChild는 마지막 노드를 나타내기때문에 nextSibling이 없다
+
+
+
+    elem.children[0].previousSibling은 항상 null일까요?
+      ㄴ children[0]은 요소 노드중 첫번째 자식노드를 나타냄
+          이 앞에 노드는 텍스트 노드가 올 수도 있으니 항상 null값을 
+          나타내진 않는다.  -->
+  <script>
+    // ~sibling: node 탐색(textnode, htmlelement)
+    // children: element 탐색
+    console.log(document.body.lastChild.nextSibling);
+    console.log(document.body.children[0].previousSibling); // "\n  "
+
+  </script>
+</body>
+
+</html>
