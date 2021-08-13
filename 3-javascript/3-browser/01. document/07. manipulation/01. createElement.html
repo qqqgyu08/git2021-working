@@ -1,0 +1,51 @@
+<html>
+
+<body>
+  <style>
+    .alert {
+      padding: 15px;
+      border: 1px solid #d6e9c6;
+      border-radius: 4px;
+      color: #3c763d;
+      background-color: #dff0d8;
+    }
+  </style>
+  <div id="container">
+    <div>annother태그</div>
+  </div>
+
+  <script>
+    // document.createElement(태그)
+    // 1. 해당 태그의 요소를 생성
+    let div = document.createElement('div');
+
+    // 2. 해당 요소의 속성들을 설정함 (div class="alert")
+    div.className = "alert";
+
+    // 3. 해당 요소의 내용을 채워넣음
+    let strong = document.createElement('strong');
+    strong.innerHTML = "안녕하세요! "
+    strong.addEventListener("click", () => { alert("안녕하세요") })
+    div.append(strong);
+
+    div.innerHTML += "중요 메시지를 확인하셨습니다.";
+    // div.innerHTMl = "<strong>안녕하세요!</strong> 중요 메시지를 확인하셨습니다.";
+
+    // 요소.append(요소) -> 가장 뒤쪽에 삽입
+    // 4. 어떤 요소에 만든 요소를 삽입함
+    const container = document.querySelector("#container");
+    setTimeout(() => {
+      //       node.append(노드나 문자열) – 노드나 문자열을 node 끝에 삽입합니다.
+      // node.prepend(노드나 문자열) – 노드나 문자열을 node 맨 앞에 삽입합니다.
+      // node.before(노드나 문자열) –- 노드나 문자열을 node 이전에 삽입합니다.
+      // node.after(노드나 문자열) –- 노드나 문자열을 node 다음에 삽입합니다.
+      // node.replaceWith(노드나 문자열) –- node를 새로운 노드나 문자열로 대체합니다.
+
+      container.append(div); // 요소 안에 가장 마지막 자식으로 추가함
+      container.prepend(div); // 요소 안에 가장 앞 첫번째 자식으로 추가함
+    }, 2000)
+  </script>
+
+</body>
+
+</html>
