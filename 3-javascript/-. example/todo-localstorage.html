@@ -37,12 +37,12 @@
     const ulList = document.querySelector("#ul-list");
     const formInput = document.querySelector("#form-input");
 
-    const liTmpl = /*html*/`
-        <li data-id="@id" class="list-group-item">
-          <button class="btn btn-outline-secondary btn-sm remove">삭제</button>          
-          ${txtMemo.value}
-        </li>
-        `
+    const liTmpl = `
+      <li data-id="@id" class="list-group-item">
+        <button class="btn btn-outline-secondary btn-sm remove">삭제</button>          
+        @memo
+      </li>    
+    `
 
     /* 이벤트 등록 부분 */
     // 입력박스에 키보드 이벤트 추가
@@ -71,7 +71,7 @@
       // 빈 값일 때 에러 메시지 처리
       if (!txtMemo.value) {
         const alertDiv = /*html*/`
-          <div class="alert alert-danger  alert-dismissible my-2" role="alert" id="liveAlert">
+          <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
             입력값을 입력해주세요.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>    
@@ -81,33 +81,33 @@
         return;
       }
 
-      /* 로컬스토리지에 입력된 데이터를 추가 */
-      // 1. 로컬스토리지에서 전체데이터를 가져온 후
 
-      // 로컬스토리지에 데이터를 추가
+      // 로컬스토리지를 객체구조로 제어
+      // 1. 로컬스토리지에서 데이터를 가져오기 getItem ->JSON.parse
+      // 2. 데이터를 조작(배열, 객체)
+      // 3. 로컬스토리지에 변경된 데이터를 저장 JSON.stringfy -> setItem    
+
+      /* -- 로컬스토리지에 입력된 데이터를 추가 -- */
+      // 1. 로컬스토리지에서 전체데이터를 가져온 후
+      // 2. 입력된 데이터를 추가(id값을 생성하여함)
+      // 3. 전체데이터를 저장
+
       // 로컬스토리지에서 데이터 가져오기
       const data = getData();
-
-      // 데이터의 id(유일값)
+      // 데이터의 id(유일값) 생성
       const id = data.length > 0 ? data[0].id + 1 : 1;
-
       // 데이터의 가장 앞쪽에 추가함
       data.unshift({ id, memo: txtMemo.value });
-
-      // 로컬스토리지에 데이터를 저장
+      // 로컬스토리지에 저장
       setData(data);
 
       // 생성할 템플릿 문자열
-      // 삭제 버튼에 remove라는 임의의 클래스를 넣음
-      // const li = /*html*/`
-      //   <li data-id="${item.id}" class="list-group-item">
-      //     <button class="btn btn-outline-secondary btn-sm remove">삭제</button>          
-      //     ${txtMemo.value}
-      //   </li>
-      //   `
+      // 삭제 버튼에 remove라는 임의의 클래스를 넣음 -> 삭제 이벤트 제어용
+      // li 태그에 id값 넣음 -> 데이터 삭제용
+      // 문자열.replace("기존문자열", 변경할문자열)
       const li = liTmpl.replace("@id", id).replace("@memo", txtMemo.value);
 
-      // ul 요소에 추가
+      // ul 요소에 추가(앞쪽에 추가)
       ulList.insertAdjacentHTML("afterbegin", li);
 
       // form 내부 요소의 입력값을 초기화
@@ -122,26 +122,28 @@
         const btnRemove = event.target;
         // 삭제버튼의 부모 노드인 li
         const li = btnRemove.parentNode;
-        // console.log(li.dataset.id);  // 제거할 데이터셋 아이디
+        console.log(li.dataset.id);
+
         // 로컬스토리지의 특정 데이터를 삭제
         // 1. 로컬스토리지에서 전체데이터 읽어오기
         // 2. 특정 데이터만 제거
         // 3. 로컬스토리지에 전체데이터 저장
 
-        // 데이터가져오기
+        // 데이터 가져오기
         const data = getData();
-        // 특정데이터 제거
-        // 삭제버튼을 클릭한 요소의  id와 다른 것들만 추출
-        // filter함수: filter(요소변수 => 반환값) 반환값이  true되는 요소들만 추출
+        // 특정 데이터 제거
+        // 삭제버튼을 클릭한 요소의 id와 다른 것들만 추출
+        // filter(요소변수 => 반환값): 반환값이 true되는 요소들만 추출
         const newData = data.filter(item => item.id != li.dataset.id);
         // 데이터 저장
         setData(newData);
-        // console.log(newData);
 
         // 태그를 삭제
         li.remove();
       }
     }
+
+
 
     function setData(data) {
       // 배열데이터를 JSON문자열로 변환하여 저장
@@ -150,46 +152,64 @@
 
     function getData() {
       // JSON 문자열을 배열로 변환하여 반환
-      const data = JSON.parse(localStorage.getItem("todo"));
+      let data = JSON.parse(localStorage.getItem("todo"));
       if (!data) {
         data = [];
       }
+
       return data;
     }
 
+
     // 로컬스토리지에서 데이터를 읽어오고 화면에 표시
     function renderData() {
-
+      // 로컬스토리지에서 데이터를 읽어오기
       const data = getData();
-      // 1안 for-of 문으로 html 요소 추가
+      console.log(data);
+
+      // [{"id":4,"memo":"xxxxx"},{"id":1,"memo":"asdfasdf"}]
+
+      // 1안 for-of 문으로 HTML 요소 추가
       // for (let item of data) {
 
       //   const li = liTmpl.replace("@id", item.id).replace("@memo", item.memo);
-      //   // ul 요소에 추가
+
+      //   // ul 요소에 추가(뒤쪽으로 추가)
       //   ulList.insertAdjacentHTML("beforeend", li);
       // }
-      // 2안 map함수로 html 문자열 생성후 innerHTML에 대입
+
+      // 2안 map함수로 HTML 문자열 생성후 innerHTML에 대입
       // map(배열요소변수 => 변경된요소), 배열요소가 변환되어 반환
       // 기존 배열크기와 같음
-
       // 배열요소가 객체(object) -> HTML템플릿문자열(string)
       // join: 배열을 구분자로 결합하여 문자열로 변환
 
-      // const newData = data.map(item => 
+      // 1. 로컬스토리지에서 꺼낸 데이터
+      // [{"id":4,"memo":"xxxxx"},{"id":1,"memo":"asdfasdf"}]
+
+      // 2. map 함수 실행 후
+      // ["<li...", "<li..."]
+
+      // 3. join("") 함수 실행 후
+      // "<li...><li...>"
+
+      // const newData = data.map(item =>
       //   liTmpl
-      //   .replace("@id", item.id)
-      //   .replace("@memo", item.memo)
-      //   ).join("");
-      //   ulList.innerHTML = newData;
-      // 이걸 더 짧게 아랫버전
+      //     .replace("@id", item.id)
+      //     .replace("@memo", item.memo)
+      // ).join("");
+      // ulList.innerHTML = newData;
 
       ulList.innerHTML = data.map(item =>
         liTmpl
           .replace("@id", item.id)
           .replace("@memo", item.memo)
       ).join("");
+
     }
+
     renderData();
+
   </script>
 </body>
 
