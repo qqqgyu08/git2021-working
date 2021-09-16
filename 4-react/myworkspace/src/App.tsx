@@ -1,35 +1,122 @@
-import Header from "./components/Header";
-import Button from "./components/Button";
-import Counter from "./components/Counter";
-import Calculator from "./components/Calculator";
-import Generator from "./components/Generator";
+// https://react.vlpt.us/styling/02-css-module.html
+// css module
+// 파일명.module.css
+// css를 사용하는 컴포넌트 범위로 css class 사용범위를 좁힐 수 있음.
+
+import "./App.scss";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"; //Link추가
+import { Suspense, lazy } from "react";
+import { Provider } from "react-redux"; // react 앱에 redux store을 제공
+import { store } from "./store"; // redux store
+
+import Home from "./features/Home";
+import Profile from "./features/profile/Profile";
+// import Navigation from "./Navigation";
+
+// SPA(Single Page Application)
+// : 페이지 파일이 1개, index.html
+// : 특정 영역(Switch)에 컴포넌트(js)를 로딩함
+// : 애플리케이션이 컴파일될 때 import한 컴포넌트가 같이 컴파일됨
+//   -> 컴파일됐을 때 파일크기가 커짐, 초기 로딩할 때 시간 걸림
+
+// Lazy-Loading 처리
+// 컴포넌트를 방문하는 시점에 로딩함
+// const Counter = lazy(() => import("./features/Counter"));
+// const Calculator = lazy(() => import("./features/CalculatorRef"));
+// const Generator = lazy(() => import("./features/Generator"));
+// const AccountManager = lazy(() => import("./features/AccountManagerRef"));
+// const features = lazy(() => import("./features/features"));
+// const BootStrap = lazy(() => import("./features/Bootstrap"));
+const Todo = lazy(() => import("./features/todo/Todo"));
+const TodoInlineEdit = lazy(() => import("./features/todo/TodoInlineEdit"));
+const Feed = lazy(() => import("./features/feed/Feed"));
+const Contact = lazy(() => import("./features/contact/Contact"));
+const ContactCreate = lazy(() => import("./features/contact/ContactCreate"));
+const ContactDetail = lazy(() => import("./features/contact/ContactDetail"));
+const ContactEdit = lazy(() => import("./features/contact/ContactEdit"));
+const ContactInline = lazy(() => import("./features/contact/ContactInline"));
+const Photo = lazy(() => import("./features/photo/Photo"));
+const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
+const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
+const PhotoEdit = lazy(() => import("./features/photo/PhotoEdit"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
   return (
-    // main container
-    <div style={{ width: "500px", margin: "0 auto" }}>
-      {/* JSX 내부에서 주석 달기 */}
-      {/* 재사용하지 않는 컴포넌트 */}
-      {/* <h1 style={{ color: "red" }}>Hello React with Typescript !</h1> */}
+    <Provider store={store}>
+      <Router>
+        {/* main container */}
+        <div className="mx-auto">
+          <header className="app-bar d-flex justify-content-end bg-primary shadow">
+            <Profile />
+          </header>
+          <nav className="drawer-menu position-fixed bg-light shadow-sm">
+            <h4 className="ms-2 my-2">MY WORKSPACE</h4>
+            {/* <Navigation /> */}
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/Todo">Todo</Link>
+              </li>
+              <li>
+                <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
+              </li>
+              <li>
+                <Link to="/Feed">Feed</Link>
+              </li>
+              <li>
+                <Link to="/Contact">Contact</Link>
+              </li>
+              <li>
+                <Link to="/ContactInline">ContactInline</Link>
+              </li>
+              <li>
+                <Link to="/Photo">Photo</Link>
+              </li>
+            </ul>
+          </nav>
+          <main className="content-container">
+            {/* Suspense 컴포넌트로 로딩중에 보여줄 화면을 처리하는 것 */}
+            {/* fallback={로딩중에 보여줄 컴포넌트} */}
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                {/* Switch 영역에 컴포넌트가 로딩됨 */}
 
-      {/* 속성값을 변경하여 재사용하는 컴포넌트 */}
-      {/* Component의 속성(prop)을 넘김 */}
-      {/* 속성명={속성값} */}
-      <Header color={"red"} title={"React"} />
-      <Header color={"green"} title={"Typescript"} />
-      <Header color={"blue"} title={"Function Component"} />
+                {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
 
-      {/* <Button color={"black"} backgroundColor={"red"} text={"Delete"} />
-      <Button color={"black"} backgroundColor={"green"} text={"Done"} /> */}
-      <Button variant={"primary"} text={"Add"} />
-      <Button variant={"secondary"} text={"Delete"} />
-      <Button variant={"warning"} text={"Delete"} />
-
-      <Counter />
-      <Calculator />
-      <Generator />
-    </div>
+                <Route path="/" component={Home} exact />
+                {/* <Route path="/features" component={features} />
+              <Route path="/counter" component={Counter} />
+              <Route path="/calculator" component={Calculator} />
+              <Route path="/generator" component={Generator} />
+              <Route path="/account-manager" component={AccountManager} />
+              <Route path="/bootstrap" component={BootStrap} /> */}
+                {/* exact: 속성은 true/false, 경로가 정확히 일치할 때만 */}
+                <Route path="/todo" component={Todo} />
+                <Route path="/todoInlineEdit" component={TodoInlineEdit} />
+                <Route path="/feed" component={Feed} />
+                <Route path="/contact" component={Contact} exact />
+                <Route path="/contact/create" component={ContactCreate} />
+                <Route
+                  path="/Contact/detail/:id"
+                  component={ContactDetail}
+                  exact
+                />
+                <Route path="/contact/edit/:id" component={ContactEdit} />
+                <Route path="/contactInline" component={ContactInline} />
+                <Route path="/photo" component={Photo} exact />
+                <Route path="/photo/create" component={PhotoCreate} />
+                {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
+                <Route path="/photo/detail/:id" component={PhotoDetail} exact />
+                <Route path="/photo/edit/:id" component={PhotoEdit} />
+              </Switch>
+            </Suspense>
+          </main>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
