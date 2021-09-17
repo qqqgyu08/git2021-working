@@ -10,6 +10,7 @@ interface ContactItemResponse {
 interface ContactItemRequest {
   name: string | undefined;
   phone: string | undefined;
+  email: string | undefined;
 }
 
 const contactApi = {

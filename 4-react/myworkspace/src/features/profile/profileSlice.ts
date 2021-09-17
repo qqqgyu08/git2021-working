@@ -14,7 +14,7 @@ export interface ProfileState {
 // state 초기 상태를 선언
 const initialState: ProfileState = {
   image: penguin,
-  username: "Daekeun Ko",
+  username: "SunQ",
 };
 
 // slice를 생성

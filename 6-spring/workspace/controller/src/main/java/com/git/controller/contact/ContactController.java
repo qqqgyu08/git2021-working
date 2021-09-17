@@ -83,6 +83,7 @@ public class ContactController {
 
 		String name = getPlainText(contact.getName());
 		String phone = getPlainText(contact.getPhone());
+		String email = getPlainText(contact.getEmail());
 		if ((contact.getName() == null || contact.getName().isEmpty())
 				|| (contact.getPhone() == null || contact.getPhone().isEmpty())) {
 
@@ -92,6 +93,7 @@ public class ContactController {
 
 		findItem.setName(contact.getName());
 		findItem.setPhone(contact.getPhone());
+		findItem.setPhone(contact.getEmail());
 
 		return findItem;
 	}

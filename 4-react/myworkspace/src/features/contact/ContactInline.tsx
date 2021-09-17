@@ -9,6 +9,7 @@ interface ContactItemState {
   name: string | undefined;
   phone: string | undefined;
   email: string | undefined;
+  isEdit?: boolean; // 수정모드인지 여부
 }
 
 const Contact = () => {
@@ -65,6 +66,7 @@ const Contact = () => {
       const result = await api.add({
         name: nameInputRef.current?.value,
         phone: phoneInputRef.current?.value,
+        email: emailInputRef.current?.value,
       });
       console.log(result);
       // -------------- state 변경부분 ------------------------
@@ -106,6 +108,54 @@ const Contact = () => {
     );
   };
 
+  const edit = (id: number, mod: boolean) => {
+    setContactList(
+      produce((state) => {
+        const item = state.find((item) => item.id === id);
+        if (item) {
+          item.isEdit = mod;
+        }
+      })
+    );
+  };
+
+  const save = async (id: number, index: number) => {
+    console.log(tbRef.current);
+    console.log(index);
+    const tbody = tbRef.current
+      ?.querySelectorAll("tr")
+      [index].querySelectorAll("input");
+    const name = tbRef.current
+      ?.querySelectorAll("tr")
+      [index].querySelectorAll("input")[0];
+    const phone = tbRef.current
+      ?.querySelectorAll("tr")
+      [index].querySelectorAll("input")[1];
+    const email = tbRef.current
+      ?.querySelectorAll("tr")
+      [index].querySelectorAll("input")[2];
+
+    // 백엔드 --------------------------------
+    if (!tbody || !name || !phone || !email) return;
+    const result = await api.modify(id, {
+      name: nameInputRef.current?.value,
+      phone: phoneInputRef.current?.value,
+      email: emailInputRef.current?.value,
+    });
+    // state 변경 ----------------------------
+    setContactList(
+      produce((state) => {
+        const item = state.find((item) => item.id === id);
+        if (item) {
+          item.name = result.data.name;
+          item.phone = result.data.phone;
+          item.email = result.data.email;
+          item.isEdit = false;
+        }
+      })
+    );
+  };
+
   return (
     <>
       <h2 className="text-center my-4">연락처 관리</h2>
@@ -119,18 +169,27 @@ const Contact = () => {
           className="form-control me-1"
           placeholder="이름"
           ref={nameInputRef}
+          onKeyPress={(e) => {
+            add(e);
+          }}
         />
         <input
           type="text"
           className="form-control me-1"
           placeholder="전화번호"
           ref={phoneInputRef}
+          onKeyPress={(e) => {
+            add(e);
+          }}
         />
         <input
           type="text"
           className="form-control me-2"
           placeholder="이메일"
           ref={emailInputRef}
+          onKeyPress={(e) => {
+            add(e);
+          }}
         />
         <button
           type="button"
@@ -181,18 +240,78 @@ const Contact = () => {
           {contactList.map((item, index) => (
             <tr key={item.id}>
               <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.phone}</td>
-              <td>{item.email}</td>
+              {!item.isEdit && <td>{item.name}</td>}
+              {!item.isEdit && <td>{item.phone}</td>}
+              {!item.isEdit && <td>{item.email}</td>}
+              {item.isEdit && (
+                <td>
+                  <input
+                    type="text"
+                    className="w-100"
+                    defaultValue={item.name}
+                  />
+                </td>
+              )}
+              {item.isEdit && (
+                <td>
+                  <input
+                    type="text"
+                    className="w-100"
+                    defaultValue={item.phone}
+                  />
+                </td>
+              )}
+              {item.isEdit && (
+                <td>
+                  <input
+                    type="text"
+                    className="w-100"
+                    defaultValue={item.email}
+                  />
+                </td>
+              )}
+
               <td>
-                <button
-                  className="btn btn-outline-secondary btn-sm remove"
-                  onClick={() => {
-                    del(item.id, index);
-                  }}
-                >
-                  삭제
-                </button>
+                {!item.isEdit && (
+                  <button
+                    className="btn btn-outline-secondary btn-sm ms-2 me-1 text-nowrap"
+                    onClick={() => {
+                      edit(item.id, true);
+                    }}
+                  >
+                    수정
+                  </button>
+                )}
+                {!item.isEdit && (
+                  <button
+                    className="btn btn-outline-secondary btn-sm remove"
+                    onClick={() => {
+                      del(item.id, index);
+                    }}
+                  >
+                    삭제
+                  </button>
+                )}
+                {item.isEdit && (
+                  <button
+                    className="btn btn-outline-secondary btn-sm ms-2 me-1 text-nowrap"
+                    onClick={() => {
+                      save(item.id, index);
+                    }}
+                  >
+                    저장
+                  </button>
+                )}
+                {item.isEdit && (
+                  <button
+                    className="btn btn-outline-secondary btn-sm text-nowrap"
+                    onClick={() => {
+                      edit(item.id, false);
+                    }}
+                  >
+                    취소
+                  </button>
+                )}
               </td>
             </tr>
           ))}
