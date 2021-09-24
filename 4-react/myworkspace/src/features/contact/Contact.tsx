@@ -5,8 +5,11 @@ import { RootState } from "../../store";
 const getTimeString = (unixtime: number) => {
   // Locale: timezone, currency 등
   // js에서는 브라우저의 정보를 이용함
+  const day = 24 * 60 * 60 * 1000;
   const dateTime = new Date(unixtime);
-  return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+  return unixtime - new Date().getTime() >= day
+    ? dateTime.toLocaleDateString()
+    : dateTime.toLocaleTimeString();
 };
 
 const Contact = () => {
@@ -52,16 +55,20 @@ const Contact = () => {
               <td>{item.phone}</td>
               <td>{item.email}</td>
               <td>
-                {" "}
                 <span style={{ fontSize: "0.75rem" }}>
-                  {getTimeString(
-                    item.editedTime ? item.editedTime : item.createdTime
-                  )}
+                  {getTimeString(item.createdTime)}
                 </span>
               </td>
             </tr>
           ))}
         </tbody>
+        {!contact.data.length && (
+          <tfoot>
+            <tr>
+              <td colSpan={5}>데이터가 없습니다.</td>
+            </tr>
+          </tfoot>
+        )}
       </table>
     </div>
   );

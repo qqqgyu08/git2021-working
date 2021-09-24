@@ -1,14 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { modifyPhoto } from "./photoSlice";
+import { requestModifyPhoto } from "./photoSaga";
+import { PhotoItem } from "./photoSlice";
 
 const PhotoEdit = () => {
   const { id } = useParams<{ id: string }>();
 
   const photoItem = useSelector((state: RootState) =>
     state.photo.data.find((item) => item.id === +id)
+  );
+
+  const isModifyCompleted = useSelector(
+    (state: RootState) => state.photo.isModifyCompleted
   );
 
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +24,10 @@ const PhotoEdit = () => {
   const titleInput = useRef<HTMLInputElement>(null);
   const descTxta = useRef<HTMLTextAreaElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    isModifyCompleted && history.push("/photo");
+  }, [isModifyCompleted, history]);
 
   const changeFile = () => {
     console.log("change");
@@ -52,8 +61,7 @@ const PhotoEdit = () => {
           item.fileName = imageFile.name;
 
           // reducer로 state 수정 및 목록으로 이동
-          dispatch(modifyPhoto(item));
-          history.push("/photo");
+          saveItem(item);
         }
       };
 
@@ -69,10 +77,15 @@ const PhotoEdit = () => {
         item.description = descTxta.current?.value;
 
         // reducer로 state 수정 및 목록으로 이동
-        dispatch(modifyPhoto(item));
-        history.push("/photo");
+        saveItem(item);
       }
     }
+  };
+
+  const saveItem = (item: PhotoItem) => {
+    // dispatch(modifyPhoto(item));
+    dispatch(requestModifyPhoto(item)); // saga action으로 대체
+    // history.push("/photo");
   };
 
   return (

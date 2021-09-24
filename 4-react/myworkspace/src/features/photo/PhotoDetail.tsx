@@ -45,7 +45,11 @@ const PhotoDetail = () => {
             <tr>
               <th>이미지</th>
               <td>
-                <img src={photoItem.photoUrl} alt={photoItem.title} />
+                <img
+                  src={photoItem.photoUrl}
+                  alt={photoItem.title}
+                  width={"100%"}
+                />
               </td>
             </tr>
           </tbody>

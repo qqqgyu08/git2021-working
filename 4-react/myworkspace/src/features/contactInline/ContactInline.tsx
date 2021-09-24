@@ -1,6 +1,6 @@
 import produce from "immer";
 import { useEffect, useRef, useState } from "react";
-import Alert from "../../components/Alert";
+import Alert from "../../components/alert/Alert";
 
 import api from "./contactApi";
 
@@ -122,18 +122,10 @@ const Contact = () => {
   const save = async (id: number, index: number) => {
     console.log(tbRef.current);
     console.log(index);
-    const tbody = tbRef.current
-      ?.querySelectorAll("tr")
-      [index].querySelectorAll("input");
-    const name = tbRef.current
-      ?.querySelectorAll("tr")
-      [index].querySelectorAll("input")[0];
-    const phone = tbRef.current
-      ?.querySelectorAll("tr")
-      [index].querySelectorAll("input")[1];
-    const email = tbRef.current
-      ?.querySelectorAll("tr")
-      [index].querySelectorAll("input")[2];
+    const tbody = tbRef.current?.querySelectorAll("tr")[index];
+    const name = tbody?.querySelectorAll("input")[0];
+    const phone = tbody?.querySelectorAll("input")[1];
+    const email = tbody?.querySelectorAll("input")[2];
 
     // 백엔드 --------------------------------
     if (!tbody || !name || !phone || !email) return;
@@ -234,7 +226,9 @@ const Contact = () => {
             )}
             {/* 빈 데이터 표시 */}
             {!isLoading && contactList.length === 0 && (
-              <td className="list-group-item">데이터가 없습니다.</td>
+              <td className="list-group-item" colSpan={5}>
+                데이터가 없습니다.
+              </td>
             )}
           </tr>
           {contactList.map((item, index) => (

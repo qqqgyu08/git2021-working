@@ -7,31 +7,23 @@ export interface ContactItem {
   email: string;
   memo?: string | undefined;
   createdTime: number;
-  editedTime?: number;
 }
 
 interface ContactState {
   data: ContactItem[];
   isFetched: boolean;
+  isAddCompleted?: boolean; // 데이터 추가가 완료되었는지 여부
+  isRemoveCompleted?: boolean; // 데이터 삭제가 완료되었는지 여부
+  isModifyCompleted?: boolean; // 데이터 수정이 완료되었는지 여부
 }
 
 const initialState: ContactState = {
-  data: [
-    {
-      id: 1,
-      name: "SunQ",
-      phone: "010-1234-5678",
-      email: "sunq@gmail.com",
-      memo: "sunq",
-      createdTime: new Date().getTime(),
-      editedTime: new Date().getTime(),
-    },
-  ],
+  data: [],
   isFetched: false,
 };
 
 const ContactSlice = createSlice({
-  name: "Contact",
+  name: "contact",
   initialState,
   reducers: {
     addContact: (state, action: PayloadAction<ContactItem>) => {
@@ -40,6 +32,11 @@ const ContactSlice = createSlice({
       console.log(contact);
       state.data.unshift(contact);
     },
+
+    initialCompleted: (state) => {
+      delete state.isAddCompleted;
+    },
+
     removeContact: (state, action: PayloadAction<number>) => {
       const id = action.payload;
       // id에 해당하는 아이템의 index를 찾고 그 index로 splice를 한다.
@@ -48,22 +45,34 @@ const ContactSlice = createSlice({
         1
       );
     },
-    editContact: (state, action: PayloadAction<ContactItem>) => {
+    modifyContact: (state, action: PayloadAction<ContactItem>) => {
       // 생성해서 넘긴 객체
-      const editItem = action.payload;
+      const modifyItem = action.payload;
       // state에 있는 객체
-      const ContactItem = state.data.find((item) => item.id === editItem.id);
+      const ContactItem = state.data.find((item) => item.id === modifyItem.id);
       // state에 있는 객체의 속성을 넘김 객체의 속성으로 변경
       if (ContactItem) {
-        ContactItem.name = editItem.name;
-        ContactItem.phone = editItem.phone;
-        ContactItem.email = editItem.email;
-        ContactItem.memo = editItem.memo;
+        ContactItem.name = modifyItem.name;
+        ContactItem.phone = modifyItem.phone;
+        ContactItem.email = modifyItem.email;
+        ContactItem.memo = modifyItem.memo;
       }
+      state.isModifyCompleted = true;
+    },
+    initialContact: (state, action: PayloadAction<ContactItem[]>) => {
+      const contacts = action.payload;
+      state.data = contacts;
+      state.isFetched = true;
     },
   },
 });
 
-export const { addContact, removeContact, editContact } = ContactSlice.actions;
+export const {
+  addContact,
+  removeContact,
+  modifyContact,
+  initialContact,
+  initialCompleted,
+} = ContactSlice.actions;
 
 export default ContactSlice.reducer;

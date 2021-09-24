@@ -35,8 +35,6 @@ const ContactCreate = () => {
       name: nameInputRef.current ? nameInputRef.current.value : "",
       phone: phoneInputRef.current ? phoneInputRef.current.value : "",
       email: emailInputRef.current ? emailInputRef.current.value : "",
-      memo: memoTxta.current?.value,
-
       createdTime: new Date().getTime(),
     };
 

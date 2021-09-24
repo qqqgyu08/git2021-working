@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Alert from "../../components/Alert";
-
+import Alert from "../../components/alert/Alert";
 import produce from "immer";
 
 // state 1건에 대한 타입

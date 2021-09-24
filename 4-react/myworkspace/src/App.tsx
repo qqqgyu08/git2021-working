@@ -11,6 +11,8 @@ import { store } from "./store"; // redux store
 
 import Home from "./features/Home";
 import Profile from "./features/profile/Profile";
+import Progress from "./components/progress/Progress";
+import AlertStack from "./components/alert/AlertStack";
 // import Navigation from "./Navigation";
 
 // SPA(Single Page Application)
@@ -21,12 +23,6 @@ import Profile from "./features/profile/Profile";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-// const Counter = lazy(() => import("./features/Counter"));
-// const Calculator = lazy(() => import("./features/CalculatorRef"));
-// const Generator = lazy(() => import("./features/Generator"));
-// const AccountManager = lazy(() => import("./features/AccountManagerRef"));
-// const features = lazy(() => import("./features/features"));
-// const BootStrap = lazy(() => import("./features/Bootstrap"));
 const Todo = lazy(() => import("./features/todo/Todo"));
 const TodoInlineEdit = lazy(() => import("./features/todo/TodoInlineEdit"));
 const Feed = lazy(() => import("./features/feed/Feed"));
@@ -34,7 +30,9 @@ const Contact = lazy(() => import("./features/contact/Contact"));
 const ContactCreate = lazy(() => import("./features/contact/ContactCreate"));
 const ContactDetail = lazy(() => import("./features/contact/ContactDetail"));
 const ContactEdit = lazy(() => import("./features/contact/ContactEdit"));
-const ContactInline = lazy(() => import("./features/contact/ContactInline"));
+const ContactInline = lazy(
+  () => import("./features/contactInline/ContactInline")
+);
 const Photo = lazy(() => import("./features/photo/Photo"));
 const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
@@ -47,7 +45,7 @@ function App() {
       <Router>
         {/* main container */}
         <div className="mx-auto">
-          <header className="app-bar d-flex justify-content-end bg-primary shadow">
+          <header className="app-bar position-fixed d-flex justify-content-end bg-primary shadow">
             <Profile />
           </header>
           <nav className="drawer-menu position-fixed bg-light shadow-sm">
@@ -87,12 +85,6 @@ function App() {
                 {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
 
                 <Route path="/" component={Home} exact />
-                {/* <Route path="/features" component={features} />
-              <Route path="/counter" component={Counter} />
-              <Route path="/calculator" component={Calculator} />
-              <Route path="/generator" component={Generator} />
-              <Route path="/account-manager" component={AccountManager} />
-              <Route path="/bootstrap" component={BootStrap} /> */}
                 {/* exact: 속성은 true/false, 경로가 정확히 일치할 때만 */}
                 <Route path="/todo" component={Todo} />
                 <Route path="/todoInlineEdit" component={TodoInlineEdit} />
@@ -113,6 +105,9 @@ function App() {
                 <Route path="/photo/edit/:id" component={PhotoEdit} />
               </Switch>
             </Suspense>
+
+            {/* <Progress /> */}
+            <AlertStack />
           </main>
         </div>
       </Router>

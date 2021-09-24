@@ -2,9 +2,9 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { editContact } from "./ContactSlice";
+import { modifyContact } from "./ContactSlice";
 
-const ContactEdit = () => {
+const ContactModify = () => {
   const { id } = useParams<{ id: string }>();
 
   const ContactItem = useSelector((state: RootState) =>
@@ -30,16 +30,15 @@ const ContactEdit = () => {
       item.phone = phoneInputRef.current ? phoneInputRef.current.value : "";
       item.email = emailInputRef.current ? emailInputRef.current.value : "";
       item.memo = memoTxta.current?.value;
-      item.editedTime = new Date().getTime();
       // reducer로 state 수정 및 목록으로 이동
-      dispatch(editContact(item));
+      dispatch(modifyContact(item));
       history.push("/Contact");
     }
   };
 
   return (
     <div style={{ width: "40vw" }} className="mx-auto">
-      <h2 className="text-center">Contact Edit</h2>
+      <h2 className="text-center">Contact Modify</h2>
       <form>
         <table className="table">
           <tbody>
@@ -114,4 +113,4 @@ const ContactEdit = () => {
   );
 };
 
-export default ContactEdit;
+export default ContactModify;

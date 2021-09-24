@@ -81,9 +81,9 @@ public class ContactController {
 			return null;
 		}
 
-		String name = getPlainText(contact.getName());
-		String phone = getPlainText(contact.getPhone());
-		String email = getPlainText(contact.getEmail());
+		getPlainText(contact.getName());
+		getPlainText(contact.getPhone());
+		getPlainText(contact.getEmail());
 		if ((contact.getName() == null || contact.getName().isEmpty())
 				|| (contact.getPhone() == null || contact.getPhone().isEmpty())) {
 

@@ -1,13 +1,14 @@
 import axios from "axios";
 
-interface ContactItemResponse {
+export interface ContactItemResponse {
   id: number;
   name: string;
   phone: string;
   email: string;
+  createdTime: number;
 }
 
-interface ContactItemRequest {
+export interface ContactItemRequest {
   name: string | undefined;
   phone: string | undefined;
   email: string | undefined;
