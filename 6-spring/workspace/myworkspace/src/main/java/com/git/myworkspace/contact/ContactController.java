@@ -1,15 +1,12 @@
 package com.git.myworkspace.contact;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ContactController {
-	private SortedMap<Long, Contact> contacts = Collections
-			.synchronizedSortedMap(new TreeMap<Long, Contact>(Collections.reverseOrder()));
 
-	private AtomicLong maxId = new AtomicLong();
+	private ContactRepository repo;
+
+	// 의존성 주입
+	@Autowired
+	public ContactController(ContactRepository repo) {
+		this.repo = repo;
+	}
 
 	// 목록조회
 	// GET /contacts
 	@GetMapping(value = "/contacts")
 	public List<Contact> getContacts() {
-		return new ArrayList<Contact>(contacts.values());
+		return repo.findAll();
 	}
 
 	// contact 1건 추가
@@ -41,11 +42,11 @@ public class ContactController {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		Long currentId = maxId.incrementAndGet();
-		Contact contactItem = Contact.builder().id(currentId).name(contact.getName()).phone(contact.getPhone())
+
+		Contact contactItem = Contact.builder().name(contact.getName()).phone(contact.getPhone())
 				.email(contact.getEmail()).memo(contact.getMemo()).createdTime(new Date().getTime()).build();
 
-		contacts.put(currentId, contactItem);
+		repo.save(contactItem);
 		res.setStatus(HttpServletResponse.SC_CREATED);
 		return contactItem;
 	}
@@ -55,9 +56,9 @@ public class ContactController {
 	public boolean removeContact(@PathVariable long id, HttpServletResponse res) {
 
 		// 해당 id의 데이터 1건을 가져옴
-		Contact contact = contacts.get(Long.valueOf(id));
+		Optional<Contact> contact = repo.findById(id);
 		// 해당 id의 데이터가 없으면
-		if (contact == null) {
+		if (contact.isEmpty()) {
 			// res.setStatus(404);
 			// NOT FOUND: 해당 경로에 리소스가 없음
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -65,7 +66,7 @@ public class ContactController {
 		}
 
 		// 삭제 수행
-		contacts.remove(Long.valueOf(id));
+		repo.deleteById(id);
 
 		return true;
 	}
@@ -74,9 +75,9 @@ public class ContactController {
 	@PutMapping(value = "/contacts/{id}")
 	public Contact modifyContact(@PathVariable long id, @RequestBody Contact contact, HttpServletResponse res) {
 
-		Contact findItem = contacts.get(Long.valueOf(id));
+		Optional<Contact> contactItem = repo.findById(id);
 
-		if (findItem == null) {
+		if (contactItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
@@ -84,6 +85,7 @@ public class ContactController {
 		getPlainText(contact.getName());
 		getPlainText(contact.getPhone());
 		getPlainText(contact.getEmail());
+
 		if ((contact.getName() == null || contact.getName().isEmpty())
 				|| (contact.getPhone() == null || contact.getPhone().isEmpty())) {
 
@@ -91,11 +93,15 @@ public class ContactController {
 			return null;
 		}
 
-		findItem.setName(contact.getName());
-		findItem.setPhone(contact.getPhone());
-		findItem.setPhone(contact.getEmail());
+		Contact contactToSave = contactItem.get();
 
-		return findItem;
+		contactToSave.setName(contact.getName());
+		contactToSave.setPhone(contact.getPhone());
+		contactToSave.setPhone(contact.getEmail());
+
+		Contact contactSaved = repo.save(contactToSave);
+
+		return contactSaved;
 	}
 
 	private String getPlainText(String text) {

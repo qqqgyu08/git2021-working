@@ -18,10 +18,11 @@ import lombok.NoArgsConstructor;
 
 // Spring Data JPA(Java Persistence API, 자바 영속화 API)
 // 영속화: 휘발성 데이터 -> 비휘발성 장치
-// 				자바객체(RAM) -> 테이블 레코드(파일내부의 특정값)
-// ORM(object Relational Mapping)
-// : 객체를 테이블과 맵핑한 것을 일컷는다
-//  1. 객체 지향으로 개발할 수 있게함(소프트웨어 공학)
+//           자바 객체(RAM) -> 테이블 레코드(파일내부의 특정값)
+
+// ORM(Object Relational Mapping)
+// : 객체를 테이블과 맵핑한 것 말함
+//  1. 객체 지향으로 개발할 수 있게함(소프트웨어공학)
 //  2. 특정 DB에 종속되지 않게함
 
 // @Entity: 테이블과 클래스를 맵핑함
@@ -33,7 +34,10 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String title;
+	// BLOB: binary large object
+	@Column(columnDefinition = "VARCHAR(1000)")
 	private String description;
+	// BLOB: binary large object
 	@Column(columnDefinition = "TEXT")
 	private String photoUrl;
 	private String fileType;
