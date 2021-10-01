@@ -23,7 +23,7 @@ const Contact = () => {
           type="button"
           className="btn btn-outline-primary text-nowrap"
           onClick={() => {
-            history.push("/Contact/create");
+            history.push("/contacts/create");
           }}
         >
           <i className="bi bi-plus" />
@@ -47,7 +47,7 @@ const Contact = () => {
             <tr
               key={item.id}
               onClick={() => {
-                history.push(`/Contact/detail/${item.id}`);
+                history.push(`/contacts/detail/${item.id}`);
               }}
             >
               <td>{item.id}</td>

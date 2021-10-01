@@ -4,9 +4,9 @@ import contactReducer, {
   initialContact,
   modifyContact,
   removeContact,
-} from "../contact/ContactSlice";
+} from "./ContactSlice";
 import { createAction, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { ContactItem } from "../contact/ContactSlice";
+import { ContactItem } from "./ContactSlice";
 import api, { ContactItemRequest, ContactItemResponse } from "./contactApi";
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 import { endProgress, startProgress } from "../../components/progress/progressSlice";

@@ -40,7 +40,7 @@ const ContactCreate = () => {
 
     dispatch(addContact(item));
 
-    history.push("/Contact");
+    history.push("/contacts");
   };
 
   return (
@@ -103,7 +103,7 @@ const ContactCreate = () => {
         <button
           className="btn btn-secondary float-start"
           onClick={() => {
-            history.push("/Contact");
+            history.push("/contacts");
           }}
         >
           <i className="bi bi-grid-3x3-gap me-1" />

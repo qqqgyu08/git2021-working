@@ -30,9 +30,7 @@ const Contact = lazy(() => import("./features/contact/Contact"));
 const ContactCreate = lazy(() => import("./features/contact/ContactCreate"));
 const ContactDetail = lazy(() => import("./features/contact/ContactDetail"));
 const ContactEdit = lazy(() => import("./features/contact/ContactEdit"));
-const ContactInline = lazy(
-  () => import("./features/contactInline/ContactInline")
-);
+const ContactInline = lazy(() => import("./features/contact/ContactInline"));
 const Photo = lazy(() => import("./features/photo/Photo"));
 const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
@@ -55,23 +53,23 @@ function App() {
               <li>
                 <Link to="/">Home</Link>
               </li>
+              {/* <li>
+                <Link to="/todo">Todo</Link>
+              </li> */}
               <li>
-                <Link to="/Todo">Todo</Link>
+                <Link to="/todoInlineEdit">Todos</Link>
               </li>
               <li>
-                <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
+                <Link to="/feeds">Feeds</Link>
+              </li>
+              {/* <li>
+                <Link to="/contacts">Contacts</Link>
+              </li> */}
+              <li>
+                <Link to="/contactInline">Contacts</Link>
               </li>
               <li>
-                <Link to="/Feed">Feed</Link>
-              </li>
-              <li>
-                <Link to="/Contact">Contact</Link>
-              </li>
-              <li>
-                <Link to="/ContactInline">ContactInline</Link>
-              </li>
-              <li>
-                <Link to="/Photo">Photo</Link>
+                <Link to="/photos">Photos</Link>
               </li>
             </ul>
           </nav>
@@ -88,25 +86,29 @@ function App() {
                 {/* exact: 속성은 true/false, 경로가 정확히 일치할 때만 */}
                 <Route path="/todo" component={Todo} />
                 <Route path="/todoInlineEdit" component={TodoInlineEdit} />
-                <Route path="/feed" component={Feed} />
-                <Route path="/contact" component={Contact} exact />
-                <Route path="/contact/create" component={ContactCreate} />
+                <Route path="/feeds" component={Feed} />
+                <Route path="/contacts" component={Contact} exact />
+                <Route path="/contacts/create" component={ContactCreate} />
                 <Route
                   path="/Contact/detail/:id"
                   component={ContactDetail}
                   exact
                 />
-                <Route path="/contact/edit/:id" component={ContactEdit} />
+                <Route path="/contacts/edit/:id" component={ContactEdit} />
                 <Route path="/contactInline" component={ContactInline} />
-                <Route path="/photo" component={Photo} exact />
-                <Route path="/photo/create" component={PhotoCreate} />
+                <Route path="/photos" component={Photo} exact />
+                <Route path="/photos/create" component={PhotoCreate} />
                 {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
-                <Route path="/photo/detail/:id" component={PhotoDetail} exact />
-                <Route path="/photo/edit/:id" component={PhotoEdit} />
+                <Route
+                  path="/photos/detail/:id"
+                  component={PhotoDetail}
+                  exact
+                />
+                <Route path="/photos/edit/:id" component={PhotoEdit} />
               </Switch>
             </Suspense>
 
-            {/* <Progress /> */}
+            <Progress />
             <AlertStack />
           </main>
         </div>

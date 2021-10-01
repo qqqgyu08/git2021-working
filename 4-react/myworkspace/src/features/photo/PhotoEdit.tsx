@@ -85,7 +85,7 @@ const PhotoEdit = () => {
   const saveItem = (item: PhotoItem) => {
     // dispatch(modifyPhoto(item));
     dispatch(requestModifyPhoto(item)); // saga action으로 대체
-    // history.push("/photo");
+    // history.push("/photos");
   };
 
   return (
@@ -138,7 +138,7 @@ const PhotoEdit = () => {
         <button
           className="btn btn-secondary me-1 float-start"
           onClick={() => {
-            history.push("/photo");
+            history.push("/photos");
           }}
         >
           <i className="bi bi-grid-3x3-gap me-1"></i>

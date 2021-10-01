@@ -32,7 +32,7 @@ const ContactModify = () => {
       item.memo = memoTxta.current?.value;
       // reducer로 state 수정 및 목록으로 이동
       dispatch(modifyContact(item));
-      history.push("/Contact");
+      history.push("/contacts");
     }
   };
 
@@ -93,7 +93,7 @@ const ContactModify = () => {
         <button
           className="btn btn-secondary me-1 float-start"
           onClick={() => {
-            history.push("/Contact");
+            history.push("/contacts");
           }}
         >
           <i className="bi bi-grid-3x3-gap me-1"></i>

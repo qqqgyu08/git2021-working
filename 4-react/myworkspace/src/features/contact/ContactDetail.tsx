@@ -24,7 +24,7 @@ const ContactDetail = () => {
 
   const handDeleteClick = () => {
     dispatch(removeContact(+id)); // id값만 넣어서 삭제
-    history.push("/Contact"); // 목록화면으로 이동
+    history.push("/contacts"); // 목록화면으로 이동
   };
 
   return (
@@ -61,7 +61,7 @@ const ContactDetail = () => {
           <button
             className="btn btn-secondary me-1"
             onClick={() => {
-              history.push("/Contact");
+              history.push("/contacts");
             }}
           >
             <i className="bi bi-grid-3x3-gap me-1"></i>
@@ -72,7 +72,7 @@ const ContactDetail = () => {
           <button
             className="btn btn-primary me-1"
             onClick={() => {
-              history.push(`/Contact/edit/${id}`);
+              history.push(`/contacts/edit/${id}`);
             }}
           >
             <i className="bi bi-pencil me-1" />

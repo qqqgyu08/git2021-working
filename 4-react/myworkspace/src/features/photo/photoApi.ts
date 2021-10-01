@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export interface PhotoPagingReponse {
+  content: PhotoItemResponse[];
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
 // 서버로 부터 받아오는 데이터 1건에 대한 타입
 export interface PhotoItemResponse {
   id: number;
@@ -25,25 +34,32 @@ const photoApi = {
   // axios.get<응답데이터의타입>(요청URL);
   // GET 요청URL HTTP/1.1
   fetch: () =>
-    axios.get<PhotoItemResponse[]>(`${process.env.REACT_APP_API_BASE}/photo`),
+                                                    // localhost::3000
+    // http://ec2-52-78-167-183.ap-northeast-2.compute.amazonaws.com
+    axios.get<PhotoItemResponse[]>(`${process.env.REACT_APP_API_BASE}/photos`),
+
+  fetchPaging: (page: number, size: number) =>
+    axios.get<PhotoPagingReponse>(
+      `${process.env.REACT_APP_API_BASE}/photos/paging?page=${page}&size=${size}`
+    ),
 
   // axios.post<응답타입>(요청URL, 요청객체(JSON바디));
   // POST 요청URL HTTP/1.1  {...}
   add: (photoItem: PhotoItemRequest) =>
     axios.post<PhotoItemResponse>(
-      `${process.env.REACT_APP_API_BASE}/photo`,
+      `${process.env.REACT_APP_API_BASE}/photos`,
       photoItem
     ),
   // axios.delete<응답타입>(요청URL);
   // DELETE 요청URL HTTP/1.1
   remove: (id: number) =>
-    axios.delete<boolean>(`${process.env.REACT_APP_API_BASE}/photo/${id}`),
+    axios.delete<boolean>(`${process.env.REACT_APP_API_BASE}/photos/${id}`),
 
   // axios.PUT<응답타입>(요청URL, 요청객체(JSON바디));
   // PUT 요청URL HTTP/1.1  {...}
   modify: (id: number, photoItem: PhotoItemRequest) =>
     axios.put<PhotoItemResponse>(
-      `${process.env.REACT_APP_API_BASE}/photo/${id}`,
+      `${process.env.REACT_APP_API_BASE}/photos/${id}`,
       photoItem
     ),
 };

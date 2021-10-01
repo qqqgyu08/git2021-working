@@ -7,6 +7,9 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +32,13 @@ public class ContactController {
 	// 목록조회
 	// GET /contacts
 	@GetMapping(value = "/contacts")
-	public List<Contact> getContacts() {
+	public List<Contact> getContacts() throws InterruptedException {
 		return repo.findAll();
+	}
+
+	@GetMapping("/contacts/paging")
+	public Page<Contact> getContactsPaging(int page, int size) {
+		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
 	}
 
 	// contact 1건 추가

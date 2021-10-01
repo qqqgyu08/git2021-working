@@ -9,6 +9,7 @@ spring:
     # :5432 - 데이터베이스 접속 포트
     # /postgres - 접속할 데이터베이스
     url: jdbc:postgresql://database-1.cdhsln5tr3nf.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=myworkspace
+
     # url: jdbc:mysql://database-2.cdhsln5tr3nf.ap-northeast-2.rds.amazonaws.com:3306/myworkspace
     
     username: postgres #postgresql

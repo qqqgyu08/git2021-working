@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
@@ -13,6 +13,11 @@ const PhotoCreate = () => {
 
   // 포토 데이터 배열 가져오기
   const photoData = useSelector((state: RootState) => state.photo.data);
+  // 추가 완료 여부
+  // 1. state 변경감지 및 값 가져오기
+  const isAddCompleted = useSelector(
+    (state: RootState) => state.photo.isAddCompleted
+  );
 
   // 프로필 정보 가져오기
   // const profile = useSelector((state: RootState) => state.profile);
@@ -22,6 +27,14 @@ const PhotoCreate = () => {
 
   // history 객체 가져오기
   const history = useHistory();
+
+  // isAddCompleted값이 변경되면 처리(처음 렌더링되는 시점에도 처리됨)
+  // 2. state가 변경되면 처리되는 함수
+  useEffect(() => {
+    console.log("--isAddCompleted 변경: " + isAddCompleted);
+    // true이면 화면이동
+    isAddCompleted && history.push("/photos");
+  }, [isAddCompleted, history, dispatch]);
 
   const handleAddClick = () => {
     // console.log(titleInput.current?.value);
@@ -48,7 +61,7 @@ const PhotoCreate = () => {
           createdTime: new Date().getTime(),
         };
 
-        console.log(item);
+        // console.log(item);
 
         // state에 데이터 추가
         // 1. addPhoto함수에서 Action 객체를 생성함
@@ -76,7 +89,7 @@ const PhotoCreate = () => {
         // });
 
         // 목록 화면으로 이동
-        history.push("/photo");
+        // history.push("/photos");
       };
 
       reader.readAsDataURL(imageFile);
@@ -123,7 +136,7 @@ const PhotoCreate = () => {
         <button
           className="btn btn-secondary float-start"
           onClick={() => {
-            history.push("/photo");
+            history.push("/photos");
           }}
         >
           <i className="bi bi-grid-3x3-gap me-1"></i>

@@ -2,7 +2,7 @@ import produce from "immer";
 import { useEffect, useRef, useState } from "react";
 import Alert from "../../components/alert/Alert";
 
-import api from "./contactApi";
+import api from "../contact/contactApi";
 
 interface ContactItemState {
   id: number;
