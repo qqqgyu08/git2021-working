@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,13 +24,13 @@ public class ContactController {
 
 	private ContactRepository repo;
 
-	// ÀÇÁ¸¼º ÁÖÀÔ
+	// ì˜ì¡´ì„± ì£¼ì…
 	@Autowired
 	public ContactController(ContactRepository repo) {
 		this.repo = repo;
 	}
 
-	// ¸ñ·ÏÁ¶È¸
+	// ëª©ë¡ì¡°íšŒ
 	// GET /contacts
 	@GetMapping(value = "/contacts")
 	public List<Contact> getContacts() throws InterruptedException {
@@ -37,11 +38,11 @@ public class ContactController {
 	}
 
 	@GetMapping("/contacts/paging")
-	public Page<Contact> getContactsPaging(int page, int size) {
+	public Page<Contact> getContactsPaging(@RequestParam int page, int size) {
 		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
 	}
 
-	// contact 1°Ç Ãß°¡
+	// contact 1ê±´ ì¶”ê°€
 	@PostMapping(value = "/contacts")
 	public Contact addContact(@RequestBody Contact contact, HttpServletResponse res) {
 		if (contact.getName() == null || contact.getPhone() == null || contact.getName().isEmpty()
@@ -59,27 +60,27 @@ public class ContactController {
 		return contactItem;
 	}
 
-	// »èÁ¦
+	// ì‚­ì œ
 	@DeleteMapping(value = "/contacts/{id}")
 	public boolean removeContact(@PathVariable long id, HttpServletResponse res) {
 
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ 1°ÇÀ» °¡Á®¿È
+		// í•´ë‹¹ idì˜ ë°ì´í„° 1ê±´ì„ ê°€ì ¸ì˜´
 		Optional<Contact> contact = repo.findById(id);
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é
+		// í•´ë‹¹ idì˜ ë°ì´í„°ê°€ ì—†ìœ¼ë©´
 		if (contact.isEmpty()) {
 			// res.setStatus(404);
-			// NOT FOUND: ÇØ´ç °æ·Î¿¡ ¸®¼Ò½º°¡ ¾øÀ½
+			// NOT FOUND: í•´ë‹¹ ê²½ë¡œì— ë¦¬ì†ŒìŠ¤ê°€ ì—†ìŒ
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
 
-		// »èÁ¦ ¼öÇà
+		// ì‚­ì œ ìˆ˜í–‰
 		repo.deleteById(id);
 
 		return true;
 	}
 
-	// ¼öÁ¤
+	// ìˆ˜ì •
 	@PutMapping(value = "/contacts/{id}")
 	public Contact modifyContact(@PathVariable long id, @RequestBody Contact contact, HttpServletResponse res) {
 

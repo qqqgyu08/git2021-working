@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 //import org.springframework.context.annotation.ComponentScan;
 
-//@SpringBootConfiguration: ÀÇÁ¸¼º ÁÖÀÔÀ» ÇÒ ¼ö ÀÖµµ·ÏÇÔ. °´Ã¼°ü¸®ÀÚ¸¦ »ı¼º(IoC ÄÁÅ×ÀÌ³Ê)
-//@EnableAutoConfiguration: »ç¿ëÇÏ´Â ÀÇÁ¸¼º¿¡ µû¶ó¼­ ÀÚµ¿À¸·Î È¯°æÀ» ±¸¼ºÇÔ
-//  -> spring-boot-starter-web: embed Tomcat À¥¼­¹ö¸¦ ±¸µ¿ÇÕ, 8080Æ÷Æ® ÀÀ´ä´ë±â
-//  -> spring-boot-devtools: ÄÚµå¸¦ °íÄ¡¸é ¼­¹ö¸¦ ´Ù½Ã ±¸µ¿ÇØÁÜ
-//@ComponentScan: ÄÄÆ÷³ÍÆ®µéÀ» °Ë»öÇÏ¿©(mainÅ¬·¡½º µ¿À§/ÇÏÀ§ ÆĞÅ°Áöµé¿¡¼­) ½Ì±ÛÅÏÀ¸·Î °´Ã¼»ı¼ºÀ» ÇÔ
-//  -> Spring Framework¿¡¼­ ÄÄÆ÷³ÍÆ®(¿¹-@Controller) ¾î³ëÅ×ÀÌ¼ÇÀÌ ÀÖ´Â Å¬·¡½ºµéÀ» °Ë»öÇÔ
-//  -> Spring Framework¿¡¼­ ½Ì±ÛÅÏÀ¸·Î °´Ã¼¸¦ »ı¼ºÇÔ
+//@SpringBootConfiguration: ì˜ì¡´ì„± ì£¼ì…ì„ í•  ìˆ˜ ìˆë„ë¡í•¨. ê°ì²´ê´€ë¦¬ìë¥¼ ìƒì„±(IoC ì»¨í…Œì´ë„ˆ)
+//@EnableAutoConfiguration: ì‚¬ìš©í•˜ëŠ” ì˜ì¡´ì„±ì— ë”°ë¼ì„œ ìë™ìœ¼ë¡œ í™˜ê²½ì„ êµ¬ì„±í•¨
+//  -> spring-boot-starter-web: embed Tomcat ì›¹ì„œë²„ë¥¼ êµ¬ë™í•©, 8080í¬íŠ¸ ì‘ë‹µëŒ€ê¸°
+//  -> spring-boot-devtools: ì½”ë“œë¥¼ ê³ ì¹˜ë©´ ì„œë²„ë¥¼ ë‹¤ì‹œ êµ¬ë™í•´ì¤Œ
+//@ComponentScan: ì»´í¬ë„ŒíŠ¸ë“¤ì„ ê²€ìƒ‰í•˜ì—¬(mainí´ë˜ìŠ¤ ë™ìœ„/í•˜ìœ„ íŒ¨í‚¤ì§€ë“¤ì—ì„œ) ì‹±ê¸€í„´ìœ¼ë¡œ ê°ì²´ìƒì„±ì„ í•¨
+//  -> Spring Frameworkì—ì„œ ì»´í¬ë„ŒíŠ¸(ì˜ˆ-@Controller) ì–´ë…¸í…Œì´ì…˜ì´ ìˆëŠ” í´ë˜ìŠ¤ë“¤ì„ ê²€ìƒ‰í•¨
+//  -> Spring Frameworkì—ì„œ ì‹±ê¸€í„´ìœ¼ë¡œ ê°ì²´ë¥¼ ìƒì„±í•¨
 
 @SpringBootApplication
 public class HelloApplication {

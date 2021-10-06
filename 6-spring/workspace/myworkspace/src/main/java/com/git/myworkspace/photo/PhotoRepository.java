@@ -3,15 +3,15 @@ package com.git.myworkspace.photo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-// photo Å×ÀÌºí¿¡ Á¢±ÙÇÏ´Â °´Ã¼
+// photo í…Œì´ë¸”ì— ì ‘ê·¼í•˜ëŠ” ê°ì²´
 
 // PhotoRepository -> JpaRepository -> PagingAndSortingRepository -> CrudRepository
-// JpaRepository¿¡´Â µ¥ÀÌÅÍ Ã³¸®¸¦ À§ÇÑ ±âº»ÀûÀÎ ¸Þ¼­µåµéÀÌ ¼±¾ðµÇ¾îÀÖÀ½
+// JpaRepositoryì—ëŠ” ë°ì´í„° ì²˜ë¦¬ë¥¼ ìœ„í•œ ê¸°ë³¸ì ì¸ ë©”ì„œë“œë“¤ì´ ì„ ì–¸ë˜ì–´ìžˆìŒ
 // JpaRepository<Photo, Long>
-// JpaRepository<¿£Æ¼Æ¼Å¸ÀÔ, idÅ¸ÀÔ>
-// ¿£Æ¼Æ¼(¼ÒÇÁÆ®¿£Áø(SE), µ¥ÀÌÅÍ°´Ã¼) == Å×ÀÌºí(DB, µ¥ÀÌÅÍ°´Ã¼)
+// JpaRepository<ì—”í‹°í‹°íƒ€ìž…, idíƒ€ìž…>
+// ì—”í‹°í‹°(ì†Œí”„íŠ¸ì—”ì§„(SE), ë°ì´í„°ê°ì²´) == í…Œì´ë¸”(DB, ë°ì´í„°ê°ì²´)
 
-// photo Å×ÀÌºí¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Â ±âº»ÀûÀÎ 
+// photo í…Œì´ë¸”ì— ì ‘ê·¼í•  ìˆ˜ ìžˆëŠ” ê¸°ë³¸ì ì¸ 
 
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Long> {

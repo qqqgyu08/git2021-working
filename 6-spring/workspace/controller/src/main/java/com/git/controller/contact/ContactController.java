@@ -25,14 +25,14 @@ public class ContactController {
 
 	private AtomicLong maxId = new AtomicLong();
 
-	// ¸ñ·ÏÁ¶È¸
+	// ëª©ë¡ì¡°íšŒ
 	// GET /contacts
 	@GetMapping(value = "/contacts")
 	public List<Contact> getContacts() {
 		return new ArrayList<Contact>(contacts.values());
 	}
 
-	// contact 1°Ç Ãß°¡
+	// contact 1ê±´ ì¶”ê°€
 	@PostMapping(value = "/contacts")
 	public Contact addContact(@RequestBody Contact contact, HttpServletResponse res) {
 		if (contact.getName() == null || contact.getPhone() == null || contact.getName().isEmpty()
@@ -50,27 +50,27 @@ public class ContactController {
 		return contactItem;
 	}
 
-	// »èÁ¦
+	// ì‚­ì œ
 	@DeleteMapping(value = "/contacts/{id}")
 	public boolean removeContact(@PathVariable long id, HttpServletResponse res) {
 
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ 1°ÇÀ» °¡Á®¿È
+		// í•´ë‹¹ idì˜ ë°ì´í„° 1ê±´ì„ ê°€ì ¸ì˜´
 		Contact contact = contacts.get(Long.valueOf(id));
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é
+		// í•´ë‹¹ idì˜ ë°ì´í„°ê°€ ì—†ìœ¼ë©´
 		if (contact == null) {
 			// res.setStatus(404);
-			// NOT FOUND: ÇØ´ç °æ·Î¿¡ ¸®¼Ò½º°¡ ¾øÀ½
+			// NOT FOUND: í•´ë‹¹ ê²½ë¡œì— ë¦¬ì†ŒìŠ¤ê°€ ì—†ìŒ
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
 
-		// »èÁ¦ ¼öÇà
+		// ì‚­ì œ ìˆ˜í–‰
 		contacts.remove(Long.valueOf(id));
 
 		return true;
 	}
 
-	// ¼öÁ¤
+	// ìˆ˜ì •
 	@PutMapping(value = "/contacts/{id}")
 	public Contact modifyContact(@PathVariable long id, @RequestBody Contact contact, HttpServletResponse res) {
 

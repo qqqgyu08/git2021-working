@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,16 @@ public class CovidService {
 
 	private final String SERVICE_KEY = "x5Y4aL8rNyrtteqOaBLbVESKOE1MX1C8z6bnGSaWuN0%2Fsk8%2B2iy0x6rguYk0ATDXdc6%2Fs17CkAWPPyl4Ylbzng%3D%3D";
 
-	private CovidSidoRepository repo;
+	private CovidSidoDailyRepository repo;
 
 	@Autowired
-	public CovidService(CovidSidoRepository repo) {
+	public CovidService(CovidSidoDailyRepository repo) {
 		this.repo = repo;
 	}
 
 	@SuppressWarnings("deprecation")
-	@Scheduled(fixedRate = 1000 * 60 * 60)
+	@Scheduled(cron = "0 5 10 * * *")
+	@CacheEvict(value = "covid-current", allEntries = true)
 	public void requestCovidSido() throws IOException {
 		System.out.println(new Date().toLocaleString());
 
@@ -54,14 +56,15 @@ public class CovidService {
 		String json = XML.toJSONObject(data).toString(2);
 //		System.out.println(json);
 
-		CovidSidoResponse response = new Gson().fromJson(json, CovidSidoResponse.class);
+		CovidSidoDailyResponse response = new Gson().fromJson(json, CovidSidoDailyResponse.class);
 //		System.out.println(response);
 
-		List<CovidSido> list = new ArrayList<CovidSido>();
-		for (CovidSidoResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
-			CovidSido record = CovidSido.builder().stdDay(item.getStdDay()).gubun(item.getGubun())
-					.defCnt(item.getDefCnt()).isolIngCnt(item.getIsolIngCnt()).overFlowCnt(item.getOverFlowCnt())
-					.localOccCnt(item.getLocalOccCnt()).build();
+		List<CovidSidoDaily> list = new ArrayList<CovidSidoDaily>();
+		for (CovidSidoDailyResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
+			CovidSidoDaily record = CovidSidoDaily.builder().stdDay(item.getStdDay()).gubun(item.getGubun())
+					.defCnt(Integer.valueOf(item.getDefCnt())).isolIngCnt(Integer.valueOf(item.getIsolIngCnt()))
+					.overFlowCnt(Integer.valueOf(item.getOverFlowCnt()))
+					.localOccCnt(Integer.valueOf(item.getLocalOccCnt())).build();
 			list.add(record);
 		}
 

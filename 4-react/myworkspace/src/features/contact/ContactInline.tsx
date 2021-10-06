@@ -14,9 +14,7 @@ interface ContactItemState {
 
 const Contact = () => {
   const [contactList, setContactList] = useState<ContactItemState[]>([]);
-
   const [isLoading, setLoading] = useState<boolean>(true);
-
   const [isError, setIsError] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 

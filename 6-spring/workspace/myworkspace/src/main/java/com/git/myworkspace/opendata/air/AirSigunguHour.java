@@ -27,9 +27,9 @@ public class AirSigunguHour {
 	@Id
 	private String cityName;
 
-	// °ª
-	private String pm10Value;
-	private String pm25Value;
+	// ê°’
+	private Integer pm10Value;
+	private Integer pm25Value;
 //	private String coValue;
 //	private String so2Value;
 //	private String o3Value;

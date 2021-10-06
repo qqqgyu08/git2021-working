@@ -32,14 +32,14 @@ public class AirSigunguHourResponse {
 
 	@Data
 	public class Item {
-		// OLAP Cuve Çü½ÄÀ¸·Î µ¥ÀÌÅÍ
-		// Áö¿ª, Ä«Å×°í¸®, ½Ã°£, °ª
+		// OLAP Cuve í˜•ì‹ìœ¼ë¡œ ë°ì´í„°
+		// ì§€ì—­, ì¹´í…Œê³ ë¦¬, ì‹œê°„, ê°’
 		private String dataTime;
 		private String sidoName;
 		private String cityName;
 
-		private String pm10Value;
-		private String pm25Value;
+		private Integer pm10Value;
+		private Integer pm25Value;
 
 		private String o3Value;
 		private String coValue;

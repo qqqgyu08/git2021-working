@@ -2,10 +2,10 @@ package com.example.testlombok;
 
 import lombok.Data;
 
-// ·Òº¹ ÇÃ·¯±×ÀÎÀÌ javaÄÚµå¸¦ ÄÄÆÄÀÏ ÇÒ ¶§(ÀúÀåÇÒ ¶§)
-// ·Òº¹ ¾î³ëÅ×ÀÌ¼Çµé(@Data)ÀÌ ÀÖ´Â¤¤ Å¬·¡½º/ÀÎÅÍÆäÀÌ½º, ÇÊµå, ¸Ş¼­µåµéÀ» Å½»ö
-// getter, setter, equals/hashcode, toString ¸Ş¼­µå¸¦
-// ÄÄÆÄÀÏµÇ´Â classÆÄÀÏ¿¡ Ãß°¡ÇØÁÜ
+// ë¡¬ë³µ í”ŒëŸ¬ê·¸ì¸ì´ javaì½”ë“œë¥¼ ì»´íŒŒì¼ í•  ë•Œ(ì €ì¥í•  ë•Œ)
+// ë¡¬ë³µ ì–´ë…¸í…Œì´ì…˜ë“¤(@Data)ì´ ìˆëŠ”ã„´ í´ë˜ìŠ¤/ì¸í„°í˜ì´ìŠ¤, í•„ë“œ, ë©”ì„œë“œë“¤ì„ íƒìƒ‰
+// getter, setter, equals/hashcode, toString ë©”ì„œë“œë¥¼
+// ì»´íŒŒì¼ë˜ëŠ” classíŒŒì¼ì— ì¶”ê°€í•´ì¤Œ
 @Data
 public class Member {
 	private int id;

@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 //@Controller + @ResponseBody = @RestController
-//@Controller: HTTP ¿äÃ»¿¡ ´ëÇÑ ÀÀ´äÀ» Ã³¸®ÇÒ ¼ö ÀÖ´Â Å¬·¡½º
-//ResponseBody: ControllerÀÎµ¥ ÀÀ´äÀ¸·Î µ¥ÀÌÅÍ °´Ã¼¸¸ Ã³¸®ÇÔ
+//@Controller: HTTP ìš”ì²­ì— ëŒ€í•œ ì‘ë‹µì„ ì²˜ë¦¬í•  ìˆ˜ ìˆëŠ” í´ë˜ìŠ¤
+//ResponseBody: Controllerì¸ë° ì‘ë‹µìœ¼ë¡œ ë°ì´í„° ê°ì²´ë§Œ ì²˜ë¦¬í•¨
 @RestController
 public class HelloController {
-	
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello() {
 		return "Hello, Spring Boot!";
 	}

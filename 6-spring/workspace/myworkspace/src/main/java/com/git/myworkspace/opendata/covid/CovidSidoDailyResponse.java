@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class CovidSidoResponse {
+public class CovidSidoDailyResponse {
 	private Response response;
 
 	@Data
@@ -32,13 +32,13 @@ public class CovidSidoResponse {
 
 	@Data
 	public class Item {
-		private String stdDay; // ±âÁØÀÏ½Ã
-		private String gubun; // ½Ãµµ¸í
+		private String stdDay; // ê¸°ì¤€ì¼ì‹œ
+		private String gubun; // ì‹œë„ëª…
 
-		private String defCnt; // È®ÁøÀÚ ¼ö
-		private String isolIngCnt; // °İ¸®ÁßÈ¯ÀÚ¼ö
-		private String overFlowCnt; // ÇØ¿ÜÀ¯ÀÔ ¼ö
-		private String localOccCnt; // Áö¿ª¹ß»ı ¼ö
+		private Integer defCnt; // í™•ì§„ì ìˆ˜
+		private Integer isolIngCnt; // ê²©ë¦¬ì¤‘í™˜ììˆ˜
+		private Integer overFlowCnt; // í•´ì™¸ìœ ì… ìˆ˜
+		private Integer localOccCnt; // ì§€ì—­ë°œìƒ ìˆ˜
 	}
 
 }
