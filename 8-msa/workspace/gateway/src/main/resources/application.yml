@@ -1,0 +1,36 @@
+server:
+  port: 8000
+spring:
+  profiles:    active: default
+  application:
+    name: gateway
+  cloud:
+    gateway:      discovery:        locator:          enabled: true
+          lower-case-service-id: true
+#      서비스 경로등록#      routes:#      - id: service3
+#        uri: lb://SERVICE-3
+#        predicates:#        - Path=/service-3/**
+#        filters:#        - RewritePath=/service-3/(?<path>.*),/$\{path}
+        
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ec2-3-34-134-169.ap-northeast-2.compute.amazonaws.com:8761/eureka/
+  instance:
+    hostname: ec2-3-34-134-169.ap-northeast-2.compute.amazonaws.com
+        
