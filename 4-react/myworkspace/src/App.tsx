@@ -13,6 +13,7 @@ import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
 import Progress from "./components/progress/Progress";
 import AlertStack from "./components/alert/AlertStack";
+import EventMessage from "./components/EventMessage";
 // import Navigation from "./Navigation";
 
 // SPA(Single Page Application)
@@ -110,6 +111,7 @@ function App() {
 
             <Progress />
             <AlertStack />
+            <EventMessage />
           </main>
         </div>
       </Router>
