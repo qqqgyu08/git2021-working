@@ -17,8 +17,10 @@ public class HelloProducerService {
 
 	public void sendMessage(byte[] message) {
 		System.out.println(message);
+		rabbit.send("test.hello.3", new Message(message));
 		// 나는 3번이니 1번과 2번에 메세지보내기
-		rabbit.send("test.hello.1", new Message(message));
-		rabbit.send("test.hello.2", new Message(message));
+
+//		rabbit.send("test.hello.1", new Message(message));
+//		rabbit.send("test.hello.2", new Message(message));
 	}
 }
